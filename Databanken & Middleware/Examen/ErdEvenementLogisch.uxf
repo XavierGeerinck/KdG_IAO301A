@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1017</x>
+      <y>405</y>
+      <w>99</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Podium
+--
+Naam
+Grootte</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>828</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Ticket
+--
+Type
+Barcode</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>504</x>
+      <y>675</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Taak
+--
+Omschrijving</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>1188</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Tracking
+--
+RfidNummer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>639</x>
+      <y>765</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Faciliteit
+--
+Bedrijf
+Type</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>0</y>
+      <w>90</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Song
+--
+Naam
+Duur
+Genre</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>306</x>
+      <y>450</y>
+      <w>90</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>Pers
+--
+Naam
+Bureau
+Toegangspas
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>621</x>
+      <y>171</y>
+      <w>162</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Playlist
+--
+Grootte
+Naam
+Duur
+Registratie Auteursrecht</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>342</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Artiest
+--
+Bio</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>441</y>
+      <w>90</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Optreden
+--
+tijdstip
+duur
+soundcheck
+geluid
+licht</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>657</x>
+      <y>648</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>FestivalDag
+--
+Datum</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>513</y>
+      <w>96</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+ 
+  Heeft &gt;</panel_attributes>
+    <additional_attributes>54;27;54;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>360</y>
+      <w>94</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=0..n
+ 
+ Heeft &gt;</panel_attributes>
+    <additional_attributes>54;27;54;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>657</x>
+      <y>45</y>
+      <w>81</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..n
+Heeft &gt;</panel_attributes>
+    <additional_attributes>45;27;45;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>234</y>
+      <w>94</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1
+ 
+ Heeft &gt;</panel_attributes>
+    <additional_attributes>54;27;54;108</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>918</x>
+      <y>432</y>
+      <w>180</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1
+Heeft &gt;</panel_attributes>
+    <additional_attributes>144;27;144;243;27;243</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>387</y>
+      <w>314</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1
+Behoort tot &gt;</panel_attributes>
+    <additional_attributes>27;63;126;63;126;27;297;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>855</x>
+      <y>657</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Festival
+--
+Locatie</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>630</y>
+      <w>152</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+Heeft &gt;</panel_attributes>
+    <additional_attributes>135;45;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>630</x>
+      <y>666</y>
+      <w>94</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..n
+ 
+ Heeft &gt;</panel_attributes>
+    <additional_attributes>54;27;54;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>711</x>
+      <y>666</y>
+      <w>170</w>
+      <h>179</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+Behoort tot &gt;</panel_attributes>
+    <additional_attributes>27;27;27;117;153;117;153;162</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>1071</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Bezoeker
+--
+Naam
+Adres</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>810</x>
+      <y>855</y>
+      <w>94</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+ 
+ Heeft &gt;</panel_attributes>
+    <additional_attributes>54;27;54;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>819</x>
+      <y>1098</y>
+      <w>81</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+Heeft &gt;</panel_attributes>
+    <additional_attributes>45;27;45;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>549</x>
+      <y>423</y>
+      <w>125</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+Behoort tot &gt;</panel_attributes>
+    <additional_attributes>27;45;108;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>567</x>
+      <y>639</y>
+      <w>107</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+Heeft &gt;</panel_attributes>
+    <additional_attributes>90;45;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>117</x>
+      <y>675</y>
+      <w>90</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Medewerker
+--
+Naam
+Adres
+Uurloon</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>639</y>
+      <w>134</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+Heeft &gt;</panel_attributes>
+    <additional_attributes>27;45;117;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>954</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>TicketOrder
+--
+KlantType
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>819</x>
+      <y>972</y>
+      <w>81</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+Heeft &gt;</panel_attributes>
+    <additional_attributes>45;27;45;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>603</x>
+      <y>828</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>TicketDetail
+--
+KostPrijs</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>666</x>
+      <y>792</y>
+      <w>170</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+Heeft &gt;</panel_attributes>
+    <additional_attributes>153;45;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>1296</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Zone
+--
+ZoneType</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>819</x>
+      <y>1206</y>
+      <w>81</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+Heeft &gt;</panel_attributes>
+    <additional_attributes>45;27;45;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>882</x>
+      <y>675</y>
+      <w>191</w>
+      <h>647</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..n
+&lt; Heeft</panel_attributes>
+    <additional_attributes>27;27;27;72;153;72;153;630;27;630</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>297</x>
+      <y>675</y>
+      <w>117</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>MedewerkerTaak</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>639</y>
+      <w>134</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1
+Behoort tot &gt;</panel_attributes>
+    <additional_attributes>27;45;117;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>486</x>
+      <y>450</y>
+      <w>90</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Contract
+--
+Bio
+MagFilmen
+MagFoto</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>369</x>
+      <y>423</y>
+      <w>134</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..n
+Heeft &gt;</panel_attributes>
+    <additional_attributes>27;45;117;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>126</x>
+      <y>450</y>
+      <w>90</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Toegangspas
+--
+Naam
+Bureau</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>189</x>
+      <y>423</y>
+      <w>134</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+Behoort Tot</panel_attributes>
+    <additional_attributes>27;45;117;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>0</x>
+      <y>441</y>
+      <w>836</w>
+      <h>881</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+Behoort Tot</panel_attributes>
+    <additional_attributes>819;864;54;864;63;27;126;27</additional_attributes>
+  </element>
+</diagram>
