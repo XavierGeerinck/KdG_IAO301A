@@ -21,16 +21,20 @@ public class Bezoeker {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="tracking_nummer")
+    private String trackingNummer;
+
+    @Column(name="naam")
+    private String naam;
+
+    @Column(name="adres")
+    private String adres;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="id")
+    private Set<Tracking> trackings = new HashSet<Tracking>();
 
     public Bezoeker() {
     }
-
-
 }

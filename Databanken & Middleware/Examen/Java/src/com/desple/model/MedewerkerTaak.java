@@ -14,23 +14,23 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="faciliteit")
-public class Faciliteit {
+@Table(name="medewerker_taak")
+public class MedewerkerTaak {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
-
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="medewerkerId")
+    private int medewerkerId;
 
-    public Faciliteit() {
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="taakId")
+    private int taakId;
+
+    public MedewerkerTaak() {
     }
-
-
 }

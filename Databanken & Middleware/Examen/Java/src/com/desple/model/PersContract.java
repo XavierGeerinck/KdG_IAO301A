@@ -3,7 +3,6 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,32 +14,34 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="festival")
-public class Festival {
+@Table(name="pers_contract")
+public class PersContract {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="locatie")
-    private String locatie;
+    @Column(name="bio")
+    private String bio;
 
-    @Column(name="start_date")
-    private Date startDate;
+    @Column(name="mag_filmen")
+    private boolean magFilmen;
 
-    @Column(name="eind_date")
-    private Date eindDate;
+    @Column(name="mag_foto")
+    private boolean magFoto;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
-    private Set<Zone> zones = new HashSet<Zone>();
+    @JoinColumn(name="optreden_id")
+    private Optreden optredenId;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
-    private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
+    @JoinColumn(name="koper_id")
+    private Koper koperId;
 
-    public Festival() {
+    public PersContract() {
     }
+
+
 }

@@ -21,16 +21,13 @@ public class TicketOrder {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    private String verkoopsWijze;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="koperId")
+    private Koper koper;
 
     public TicketOrder() {
     }
-
-
 }

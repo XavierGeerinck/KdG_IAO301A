@@ -14,8 +14,8 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="ticket_detail")
-public class TicketDetail {
+@Table(name="song_playlist")
+public class SongPlaylist {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -24,12 +24,17 @@ public class TicketDetail {
     @Column(name="title")
     private String title;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="playlistId")
+    private Playlist playlistId;
 
-    public TicketDetail() {
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="songId")
+    private Song songId;
+
+    public SongPlaylist() {
     }
 
 

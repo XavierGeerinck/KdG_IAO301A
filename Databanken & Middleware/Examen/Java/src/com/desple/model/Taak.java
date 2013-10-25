@@ -21,16 +21,19 @@ public class Taak {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="omschrijving")
+    private String omschrijving;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="id")
+    private Set<MedewerkerTaak> medewerkerTaken = new HashSet<MedewerkerTaak>();
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="festivalDagId")
+    private FestivalDag festivalDag;
 
     public Taak() {
     }
-
-
 }

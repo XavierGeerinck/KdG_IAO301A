@@ -14,22 +14,30 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="pers")
-public class Pers {
+@Table(name="koper")
+public class Koper {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="naam")
+    private String naam;
+
+    @Column(name="type")
+    private int type;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="id")
+    private Set<TicketOrder> ticketOrders = new HashSet<TicketOrder>();
 
-    public Pers() {
+    @OneToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id")
+    private Set<PersContract> persContracten = new HashSet<PersContract>();
+
+    public Koper() {
     }
 
 

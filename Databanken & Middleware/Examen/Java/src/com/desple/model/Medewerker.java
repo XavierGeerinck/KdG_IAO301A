@@ -21,16 +21,20 @@ public class Medewerker {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="naam")
+    private String naam;
+
+    @Column(name="adres")
+    private String adres;
+
+    @Column(name="uurloon")
+    private double uurloon;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="id")
+    private Set<Taak> taken = new HashSet<Taak>();
 
     public Medewerker() {
     }
-
-
 }
