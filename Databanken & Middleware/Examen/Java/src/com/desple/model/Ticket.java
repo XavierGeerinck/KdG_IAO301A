@@ -42,13 +42,50 @@ public class Ticket {
     @JoinColumn(name="ticketOrderId")
     private TicketOrder ticketOrder;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
-
     public Ticket() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getSoort() {
+        return soort;
+    }
+
+    public void setSoort(String soort) {
+        this.soort = soort;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public FestivalDag getFestivalDag() {
+        return festivalDag;
+    }
+
+    public void setFestivalDag(FestivalDag festivalDag) {
+        this.festivalDag = festivalDag;
+    }
+
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public TicketOrder getTicketOrder() {
+        return ticketOrder;
+    }
+
+    public void setTicketOrder(TicketOrder ticketOrder) {
+        this.ticketOrder = ticketOrder;
+    }
 }

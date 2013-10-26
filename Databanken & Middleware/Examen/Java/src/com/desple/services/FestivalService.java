@@ -40,4 +40,17 @@ public class FestivalService {
         //return results;
         return null;
     }
+
+    public static List<Festival> getFestivals() {
+        // Create session
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        // Create a query
+        Query query = session.createQuery("from Festival");
+
+        // Get result
+        List<Festival> results = query.list();
+
+        return results;
+    }
 }
