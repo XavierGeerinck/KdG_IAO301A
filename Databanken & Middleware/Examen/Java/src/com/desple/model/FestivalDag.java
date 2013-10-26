@@ -3,6 +3,7 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,16 +22,34 @@ public class FestivalDag {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="datum")
+    private Date datum;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="festivalId")
+    private Festival festival;
 
     public FestivalDag() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
 }

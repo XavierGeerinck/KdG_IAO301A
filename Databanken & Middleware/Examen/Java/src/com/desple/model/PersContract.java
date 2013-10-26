@@ -14,21 +14,32 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="taak")
-public class Taak {
+@Table(name="pers_contract")
+public class PersContract {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="omschrijving")
-    private String omschrijving;
+    @Column(name="bio")
+    private String bio;
+
+    @Column(name="mag_filmen")
+    private boolean magFilmen;
+
+    @Column(name="mag_foto")
+    private boolean magFoto;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalDagId")
-    private FestivalDag festivalDag;
+    @JoinColumn(name="optreden_id")
+    private Optreden optredenId;
 
-    public Taak() {
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="koper_id")
+    private Koper koperId;
+
+    public PersContract() {
     }
 }

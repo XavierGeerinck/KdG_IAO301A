@@ -3,8 +3,7 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,16 +20,81 @@ public class Festival {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="naam")
+    private String naam;
+
+    @Column(name="locatie")
+    private String locatie;
+
+    @Column(name="start_date")
+    private Date startDate;
+
+    @Column(name="eind_date")
+    private Date eindDate;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="id")
+    private Set<Zone> zones = new HashSet<Zone>();
+
+    @OneToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="id")
+    private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
 
     public Festival() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public String getLocatie() {
+        return locatie;
+    }
+
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEindDate() {
+        return eindDate;
+    }
+
+    public void setEindDate(Date eindDate) {
+        this.eindDate = eindDate;
+    }
+
+    public Set<Zone> getZones() {
+        return zones;
+    }
+
+    public void setZones(Set<Zone> zones) {
+        this.zones = zones;
+    }
+
+    public Set<FestivalDag> getFestivalDagen() {
+        return festivalDagen;
+    }
+
+    public void setFestivalDagen(Set<FestivalDag> festivalDagen) {
+        this.festivalDagen = festivalDagen;
+    }
 }

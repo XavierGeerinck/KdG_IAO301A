@@ -21,8 +21,26 @@ public class Ticket {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="soort")
+    private String soort;
+
+    @Column(name="barcode")
+    private String barcode;
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="festivalDagId")
+    private FestivalDag festivalDag;
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="ticketTypeId")
+    private TicketType ticketType;
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="ticketOrderId")
+    private TicketOrder ticketOrder;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})

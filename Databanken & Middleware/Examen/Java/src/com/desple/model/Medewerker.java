@@ -21,16 +21,57 @@ public class Medewerker {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="naam")
+    private String naam;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @Column(name="adres")
+    private String adres;
+
+    @Column(name="uurloon")
+    private double uurloon;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="medewerker_taak", joinColumns = {
+            @JoinColumn(name="medewerker_id") }, inverseJoinColumns = {
+            @JoinColumn(name="taak_id") })
+    private Set<Taak> taken = new HashSet<Taak>();
 
     public Medewerker() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public double getUurloon() {
+        return uurloon;
+    }
+
+    public void setUurloon(double uurloon) {
+        this.uurloon = uurloon;
+    }
+
+    public Set<Taak> getTaken() {
+        return taken;
+    }
+
+    public void setTaken(Set<Taak> taken) {
+        this.taken = taken;
+    }
 }

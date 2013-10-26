@@ -14,40 +14,39 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="artiest")
-public class Artiest {
+@Table(name="ticket_type")
+public class TicketType {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="bio")
-    private String bio;
+    @Column(name="prijs")
+    private double prijs;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="zoneId")
-    private Zone zone;
+    @Column(name="type")
+    private String type;
 
-    public Artiest() {
+    public TicketType() {
     }
 
     public int getId() {
         return id;
     }
 
-    public String getBio() {
-        return bio;
+    public double getPrijs() {
+        return prijs;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setPrijs(double prijs) {
+        this.prijs = prijs;
     }
 
-    public Zone getZone() {
-        return zone;
+    public String getType() {
+        return type;
     }
 
-    public void setZone(Zone zone) {
-        this.zone = zone;
+    public void setType(String type) {
+        this.type = type;
     }
 }

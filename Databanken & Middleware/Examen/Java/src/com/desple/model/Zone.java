@@ -21,16 +21,47 @@ public class Zone {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="title")
-    private String title;
+    @Column(name="zone_type")
+    private String ZoneType;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @JoinColumn(name="festivalId")
+    private Festival festival;
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="ticketTypeId")
+    private TicketType ticketType;
 
     public Zone() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getZoneType() {
+        return ZoneType;
+    }
+
+    public void setZoneType(String zoneType) {
+        ZoneType = zoneType;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
+
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
 }
