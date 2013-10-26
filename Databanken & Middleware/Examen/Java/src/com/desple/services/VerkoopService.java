@@ -17,7 +17,12 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class VerkoopService {
-    public static boolean registerOrder(ArrayList<Ticket> tickets) {
+    public static void registerOrder(ArrayList<Ticket> tickets) {
+        // Validation
+        if (tickets == null) {
+            throw new NullPointerException("Tickets is null");
+        }
+
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -38,13 +43,10 @@ public class VerkoopService {
             e.printStackTrace();
 
             // We had an error so return false
-            return false;
+            throw e;
         } finally {
             // Do not forget to close the session
             session.close();
-
-            // Return true on success
-            return true;
         }
     }
 }

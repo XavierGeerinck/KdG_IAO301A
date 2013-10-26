@@ -1,8 +1,10 @@
 package com.desple.model;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +33,12 @@ public class Tracking {
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="bezoekerId")
-    private Bezoeker bezoekerId;
+    private Bezoeker bezoeker;
+
+    @ManyToOne
+    @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+    @JoinColumn(name="zoneId")
+    private Zone zone;
 
     public Tracking() {
     }
@@ -56,11 +63,19 @@ public class Tracking {
         this.inOut = inOut;
     }
 
-    public Bezoeker getBezoekerId() {
-        return bezoekerId;
+    public Bezoeker getBezoeker() {
+        return bezoeker;
     }
 
-    public void setBezoekerId(Bezoeker bezoekerId) {
-        this.bezoekerId = bezoekerId;
+    public void setBezoeker(Bezoeker bezoeker) {
+        this.bezoeker = bezoeker;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }
