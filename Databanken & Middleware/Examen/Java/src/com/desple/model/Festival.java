@@ -3,9 +3,7 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +19,9 @@ public class Festival {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="naam")
+    private String naam;
 
     @Column(name="locatie")
     private String locatie;
@@ -48,9 +49,18 @@ public class Festival {
         return id;
     }
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
     public String getLocatie() {
         return locatie;
     }
+
 
     public void setLocatie(String locatie) {
         this.locatie = locatie;
