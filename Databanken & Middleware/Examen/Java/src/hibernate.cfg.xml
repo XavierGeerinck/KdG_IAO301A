@@ -22,8 +22,14 @@
         <property name="use_sql_comments">false</property>
 
         <!-- Create zorgt ervoor dat iedere keer alle tabellen opnieuw worden aangemaakt en leeg gemaakt, update
-        zorgt ervoor dat de vorige data base wordt behouden -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        zorgt ervoor dat de vorige data base wordt behouden
+
+        update: Updates the schema
+        create-drop: drop the sche,a at the end of the session
+        create: creates the schema, destroying previous changes
+        validate: validates the schema
+        -->
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Reference to all the mapping files used -->
         <!--

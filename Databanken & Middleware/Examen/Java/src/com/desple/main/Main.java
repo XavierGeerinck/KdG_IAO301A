@@ -1,10 +1,15 @@
 package com.desple.main;
 
 import com.desple.model.Festival;
+import com.desple.model.Zone;
 import com.desple.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,8 +27,13 @@ public class Main {
             transaction = session.beginTransaction();
 
             Festival festival = new Festival();
+            festival.setEindDate(new Date());
+            festival.setStartDate(new Date());
+            festival.setLocatie("Somewhere in nowhere");
 
             session.save(festival);
+
+            transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
