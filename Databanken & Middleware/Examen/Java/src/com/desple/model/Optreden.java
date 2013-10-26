@@ -31,25 +31,25 @@ public class Optreden {
     @Column(name="soundcheck")
     private boolean soundCheck;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="festDagId")
-    private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
+    private FestivalDag festivalDag;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="playlistId")
-    private Set<Playlist> playlists = new HashSet<Playlist>();
+    private Playlist playlist;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="zoneId")
-    private Set<Zone> zones = new HashSet<Zone>();
+    private Zone zone;
 
-    @OneToMany
+    @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="apparatuurId")
-    private Set<BenodigdeApparatuur> apparatuurRequirements = new HashSet<BenodigdeApparatuur>();
+    private BenodigdeApparatuur benodigdeApparatuur;
 
     public Optreden() {
     }
@@ -82,35 +82,35 @@ public class Optreden {
         this.soundCheck = soundCheck;
     }
 
-    public Set<FestivalDag> getFestivalDagen() {
-        return festivalDagen;
+    public FestivalDag getFestivalDag() {
+        return festivalDag;
     }
 
-    public void setFestivalDagen(Set<FestivalDag> festivalDagen) {
-        this.festivalDagen = festivalDagen;
+    public void setFestivalDag(FestivalDag festivalDag) {
+        this.festivalDag = festivalDag;
     }
 
-    public Set<Playlist> getPlaylists() {
-        return playlists;
+    public Playlist getPlaylist() {
+        return playlist;
     }
 
-    public void setPlaylists(Set<Playlist> playlists) {
-        this.playlists = playlists;
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
     }
 
-    public Set<Zone> getZones() {
-        return zones;
+    public Zone getZone() {
+        return zone;
     }
 
-    public void setZones(Set<Zone> zones) {
-        this.zones = zones;
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 
-    public Set<BenodigdeApparatuur> getApparatuurRequirements() {
-        return apparatuurRequirements;
+    public BenodigdeApparatuur getBenodigdeApparatuur() {
+        return benodigdeApparatuur;
     }
 
-    public void setApparatuurRequirements(Set<BenodigdeApparatuur> apparatuurRequirements) {
-        this.apparatuurRequirements = apparatuurRequirements;
+    public void setBenodigdeApparatuur(BenodigdeApparatuur benodigdeApparatuur) {
+        this.benodigdeApparatuur = benodigdeApparatuur;
     }
 }
