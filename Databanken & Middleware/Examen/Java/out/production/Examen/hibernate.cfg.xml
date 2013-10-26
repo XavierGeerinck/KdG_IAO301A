@@ -29,7 +29,7 @@
         create: creates the schema, destroying previous changes
         validate: validates the schema
         -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Reference to all the mapping files used -->
         <!--

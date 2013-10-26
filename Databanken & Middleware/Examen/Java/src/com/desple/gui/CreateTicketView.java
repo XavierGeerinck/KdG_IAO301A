@@ -1,11 +1,7 @@
 package com.desple.gui;
 
-import com.desple.model.Festival;
-import com.desple.model.FestivalDag;
-import com.desple.model.Ticket;
-import com.desple.services.FestivalDagService;
-import com.desple.services.FestivalService;
-import com.desple.services.VerkoopService;
+import com.desple.model.*;
+import com.desple.services.*;
 import com.desple.util.SpringUtilities;
 
 import javax.swing.*;
@@ -36,10 +32,13 @@ public class CreateTicketView extends JFrame {
     private JComboBox<Festival> cmbFestivals;
     private JLabel lblFestivalDagen;
     private JComboBox<FestivalDag> cmbFestivalDagen;
+    private JLabel lblZones;
+    private JComboBox<Zone> cmbZones;
+    private JLabel lblTicketTypes;
+    private JComboBox<TicketType> cmbTicketTypes;
 
     public CreateTicketView() {
         setTitle("Create Ticket");
-        setSize(new Dimension(400, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center GUI
 
@@ -92,6 +91,26 @@ public class CreateTicketView extends JFrame {
         }
 
         lblFestivalDagen.setLabelFor(cmbFestivalDagen);
+
+        // Zones
+        lblZones = new JLabel("Zones", JLabel.TRAILING);
+        cmbZones = new JComboBox<Zone>();
+
+        for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
+            cmbZones.addItem(z);
+        }
+
+        lblZones.setLabelFor(cmbZones);
+
+        // Ticket Type
+        lblTicketTypes = new JLabel("Ticket Types", JLabel.TRAILING);
+        cmbTicketTypes = new JComboBox<TicketType>();
+
+        for (TicketType tp : TicketTypeService.getTicketTypes((Zone)cmbZones.getSelectedItem())) {
+            cmbTicketTypes.addItem(tp);
+        }
+
+        lblTicketTypes.setLabelFor(cmbTicketTypes);
     }
 
     private void addComponents() {
@@ -137,9 +156,10 @@ public class CreateTicketView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get festival dag
-                /*Ticket ticket = new Ticket();
-                ticket.setFestivalDag();
-                ticket.setSoort();
+                Ticket ticket = new Ticket();
+                ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
+
+                /*ticket.setSoort();
                 ticket.setTicketOrder();
                 ticket.setTicketType();
                 VerkoopService.registerOrder();  */
@@ -151,10 +171,18 @@ public class CreateTicketView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Update festival dagen
                 cmbFestivalDagen.removeAllItems();
 
                 for (FestivalDag fd : FestivalDagService.getFestivalDagen((Festival) cmbFestivals.getSelectedItem())) {
                     cmbFestivalDagen.addItem(fd);
+                }
+
+                // Update zones
+                cmbZones.removeAllItems();
+
+                for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
+                    cmbZones.addItem(z);
                 }
             }
         });
