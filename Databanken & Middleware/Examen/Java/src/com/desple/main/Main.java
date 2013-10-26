@@ -1,5 +1,6 @@
 package com.desple.main;
 
+import com.desple.gui.CreateTicketView;
 import com.desple.model.Festival;
 import com.desple.model.Zone;
 import com.desple.util.HibernateUtil;
@@ -7,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,25 +22,44 @@ import java.util.Set;
  */
 public class Main {
     public static void main(String[] args) {
+        // Start gui in a thread.
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                CreateTicketView view = new CreateTicketView();
+                view.setVisible(true);
+            }
+        });
+
+        /*
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
 
+        // Create a festival
+        Festival festival = new Festival();
+        festival.setEindDate(new Date());
+        festival.setStartDate(new Date());
+        festival.setLocatie("Somewhere in nowhere");
+
+        // Saving to the database
         try {
+            // Create a transaction
             transaction = session.beginTransaction();
 
-            Festival festival = new Festival();
-            festival.setEindDate(new Date());
-            festival.setStartDate(new Date());
-            festival.setLocatie("Somewhere in nowhere");
-
+            // Persist the objects
             session.save(festival);
 
+            // When persisting succeeded and no errors found then commit.
             transaction.commit();
         } catch (HibernateException e) {
+            // Catch the error and rollback if we found one
             transaction.rollback();
+
+            // Show a beautifull stacktrace :3
             e.printStackTrace();
         } finally {
+            // If everything is done close the session
             session.close();
-        }
+        } */
     }
 }
