@@ -24,12 +24,6 @@ public class Bezoeker {
     @Column(name="tracking_nummer")
     private String trackingNummer;
 
-    @Column(name="naam")
-    private String naam;
-
-    @Column(name="adres")
-    private String adres;
-
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="id")
@@ -48,22 +42,6 @@ public class Bezoeker {
 
     public void setTrackingNummer(String trackingNummer) {
         this.trackingNummer = trackingNummer;
-    }
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
     }
 
     public Set<Tracking> getTrackings() {
