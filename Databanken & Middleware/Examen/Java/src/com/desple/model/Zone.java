@@ -36,4 +36,32 @@ public class Zone {
 
     public Zone() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getZoneType() {
+        return ZoneType;
+    }
+
+    public void setZoneType(String zoneType) {
+        ZoneType = zoneType;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
+
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
 }

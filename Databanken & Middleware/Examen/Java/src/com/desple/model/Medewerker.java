@@ -30,11 +30,48 @@ public class Medewerker {
     @Column(name="uurloon")
     private double uurloon;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="medewerker_taak", joinColumns = {
+            @JoinColumn(name="medewerker_id") }, inverseJoinColumns = {
+            @JoinColumn(name="taak_id") })
     private Set<Taak> taken = new HashSet<Taak>();
 
     public Medewerker() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public double getUurloon() {
+        return uurloon;
+    }
+
+    public void setUurloon(double uurloon) {
+        this.uurloon = uurloon;
+    }
+
+    public Set<Taak> getTaken() {
+        return taken;
+    }
+
+    public void setTaken(Set<Taak> taken) {
+        this.taken = taken;
     }
 }

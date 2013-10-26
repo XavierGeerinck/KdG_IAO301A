@@ -38,11 +38,50 @@ public class Playlist {
     @JoinColumn(name="id")
     private Set<Optreden> optreden = new HashSet<Optreden>();
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
-    private Set<SongPlaylist> songPlaylists = new HashSet<SongPlaylist>();
-
     public Playlist() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getGrootte() {
+        return grootte;
+    }
+
+    public void setGrootte(double grootte) {
+        this.grootte = grootte;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public double getDuur() {
+        return duur;
+    }
+
+    public void setDuur(double duur) {
+        this.duur = duur;
+    }
+
+    public boolean isRegistratieAuteursrecht() {
+        return registratieAuteursrecht;
+    }
+
+    public void setRegistratieAuteursrecht(boolean registratieAuteursrecht) {
+        this.registratieAuteursrecht = registratieAuteursrecht;
+    }
+
+    public Set<Optreden> getOptreden() {
+        return optreden;
+    }
+
+    public void setOptreden(Set<Optreden> optreden) {
+        this.optreden = optreden;
     }
 }

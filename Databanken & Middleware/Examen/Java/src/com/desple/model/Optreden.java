@@ -53,4 +53,64 @@ public class Optreden {
 
     public Optreden() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getTijdstip() {
+        return tijdstip;
+    }
+
+    public void setTijdstip(Date tijdstip) {
+        this.tijdstip = tijdstip;
+    }
+
+    public double getDuur() {
+        return duur;
+    }
+
+    public void setDuur(double duur) {
+        this.duur = duur;
+    }
+
+    public boolean isSoundCheck() {
+        return soundCheck;
+    }
+
+    public void setSoundCheck(boolean soundCheck) {
+        this.soundCheck = soundCheck;
+    }
+
+    public Set<FestivalDag> getFestivalDagen() {
+        return festivalDagen;
+    }
+
+    public void setFestivalDagen(Set<FestivalDag> festivalDagen) {
+        this.festivalDagen = festivalDagen;
+    }
+
+    public Set<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(Set<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+    public Set<Zone> getZones() {
+        return zones;
+    }
+
+    public void setZones(Set<Zone> zones) {
+        this.zones = zones;
+    }
+
+    public Set<BenodigdeApparatuur> getApparatuurRequirements() {
+        return apparatuurRequirements;
+    }
+
+    public void setApparatuurRequirements(Set<BenodigdeApparatuur> apparatuurRequirements) {
+        this.apparatuurRequirements = apparatuurRequirements;
+    }
 }

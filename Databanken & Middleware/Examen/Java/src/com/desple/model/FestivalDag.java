@@ -28,8 +28,28 @@ public class FestivalDag {
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="festivalId")
-    private Set<Song> songs = new HashSet<Song>();
+    private Festival festival;
 
     public FestivalDag() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
     }
 }

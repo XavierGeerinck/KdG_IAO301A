@@ -29,6 +29,12 @@ public class Song {
     @JoinColumn(name="albumId")
     private Set<Song> songs = new HashSet<Song>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="song_playlist", joinColumns = {
+            @JoinColumn(name="song_id") }, inverseJoinColumns = {
+            @JoinColumn(name="playlist_id") })
+    private Set<Playlist> playlists = new HashSet<Playlist>();
+
     public Song() {
     }
 

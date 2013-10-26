@@ -30,4 +30,24 @@ public class TicketOrder {
 
     public TicketOrder() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getVerkoopsWijze() {
+        return verkoopsWijze;
+    }
+
+    public void setVerkoopsWijze(String verkoopsWijze) {
+        this.verkoopsWijze = verkoopsWijze;
+    }
+
+    public Koper getKoper() {
+        return koper;
+    }
+
+    public void setKoper(Koper koper) {
+        this.koper = koper;
+    }
 }

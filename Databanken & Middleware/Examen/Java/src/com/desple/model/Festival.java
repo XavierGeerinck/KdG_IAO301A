@@ -43,4 +43,48 @@ public class Festival {
 
     public Festival() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getLocatie() {
+        return locatie;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEindDate() {
+        return eindDate;
+    }
+
+    public void setEindDate(Date eindDate) {
+        this.eindDate = eindDate;
+    }
+
+    public Set<Zone> getZones() {
+        return zones;
+    }
+
+    public void setZones(Set<Zone> zones) {
+        this.zones = zones;
+    }
+
+    public Set<FestivalDag> getFestivalDagen() {
+        return festivalDagen;
+    }
+
+    public void setFestivalDagen(Set<FestivalDag> festivalDagen) {
+        this.festivalDagen = festivalDagen;
+    }
 }

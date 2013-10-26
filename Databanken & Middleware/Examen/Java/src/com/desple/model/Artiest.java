@@ -30,4 +30,24 @@ public class Artiest {
 
     public Artiest() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
 }

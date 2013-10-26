@@ -37,4 +37,40 @@ public class BenodigdeApparatuur {
 
     public BenodigdeApparatuur() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isMicro() {
+        return micro;
+    }
+
+    public void setMicro(boolean micro) {
+        this.micro = micro;
+    }
+
+    public boolean isGeluidsVersterking() {
+        return geluidsVersterking;
+    }
+
+    public void setGeluidsVersterking(boolean geluidsVersterking) {
+        this.geluidsVersterking = geluidsVersterking;
+    }
+
+    public boolean isLicht() {
+        return licht;
+    }
+
+    public void setLicht(boolean licht) {
+        this.licht = licht;
+    }
+
+    public Set<Optreden> getOptredens() {
+        return optredens;
+    }
+
+    public void setOptredens(Set<Optreden> optredens) {
+        this.optredens = optredens;
+    }
 }

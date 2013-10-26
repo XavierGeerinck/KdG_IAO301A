@@ -40,5 +40,39 @@ public class Koper {
     public Koper() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Set<TicketOrder> getTicketOrders() {
+        return ticketOrders;
+    }
+
+    public void setTicketOrders(Set<TicketOrder> ticketOrders) {
+        this.ticketOrders = ticketOrders;
+    }
+
+    public Set<PersContract> getPersContracten() {
+        return persContracten;
+    }
+
+    public void setPersContracten(Set<PersContract> persContracten) {
+        this.persContracten = persContracten;
+    }
 }

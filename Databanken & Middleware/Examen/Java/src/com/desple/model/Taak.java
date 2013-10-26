@@ -24,11 +24,6 @@ public class Taak {
     @Column(name="omschrijving")
     private String omschrijving;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
-    private Set<MedewerkerTaak> medewerkerTaken = new HashSet<MedewerkerTaak>();
-
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="festivalDagId")

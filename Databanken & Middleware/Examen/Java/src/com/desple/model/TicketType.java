@@ -29,4 +29,24 @@ public class TicketType {
 
     public TicketType() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getPrijs() {
+        return prijs;
+    }
+
+    public void setPrijs(double prijs) {
+        this.prijs = prijs;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
