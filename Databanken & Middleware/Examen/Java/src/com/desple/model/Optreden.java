@@ -22,11 +22,11 @@ public class Optreden {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="tijdstip")
-    private Date tijdstip;
+    @Column(name="startDate")
+    private Date startDate;
 
-    @Column(name="duur")
-    private double duur;
+    @Column(name="eindDate")
+    private Date eindDate;
 
     @Column(name="soundcheck")
     private boolean soundCheck;
@@ -58,20 +58,20 @@ public class Optreden {
         return id;
     }
 
-    public Date getTijdstip() {
-        return tijdstip;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setTijdstip(Date tijdstip) {
-        this.tijdstip = tijdstip;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public double getDuur() {
-        return duur;
+    public Date getEindDate() {
+        return eindDate;
     }
 
-    public void setDuur(double duur) {
-        this.duur = duur;
+    public void setEindDate(Date eindDate) {
+        this.eindDate = eindDate;
     }
 
     public boolean isSoundCheck() {

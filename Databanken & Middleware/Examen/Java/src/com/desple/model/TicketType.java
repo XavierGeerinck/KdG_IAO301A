@@ -24,7 +24,7 @@ public class TicketType {
     @Column(name="prijs")
     private double prijs;
 
-    @Column(name= "ticketType", columnDefinition = "enum('NORMAL', 'VIP', 'COMBI' )")
+    @Column(name= "ticketType", columnDefinition = "enum('NORMAL', 'VIP', 'COMBI', 'PERS' )")
     @Enumerated(EnumType.STRING)
     private TicketTypes type;
 

@@ -23,17 +23,14 @@ public class TicketOrder {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    private String verkoopsWijze;
+    @Column(name= "verkoopWijze", columnDefinition = "enum('WEB', 'HANDELAAR')")
+    @Enumerated(EnumType.STRING)
+    private TicketOrders verkoopsWijze;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="koperId")
     private Koper koper;
-
-    @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalId")
-    private Festival festival;
 
     public TicketOrder() {
     }
@@ -42,11 +39,11 @@ public class TicketOrder {
         return id;
     }
 
-    public String getVerkoopsWijze() {
+    public TicketOrders getVerkoopsWijze() {
         return verkoopsWijze;
     }
 
-    public void setVerkoopsWijze(String verkoopsWijze) {
+    public void setVerkoopsWijze(TicketOrders verkoopsWijze) {
         this.verkoopsWijze = verkoopsWijze;
     }
 
@@ -56,13 +53,5 @@ public class TicketOrder {
 
     public void setKoper(Koper koper) {
         this.koper = koper;
-    }
-
-    public Festival getFestival() {
-        return festival;
-    }
-
-    public void setFestival(Festival festival) {
-        this.festival = festival;
     }
 }

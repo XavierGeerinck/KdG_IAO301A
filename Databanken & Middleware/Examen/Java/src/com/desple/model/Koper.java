@@ -24,8 +24,9 @@ public class Koper {
     @Column(name="naam")
     private String naam;
 
-    @Column(name="type")
-    private String type;
+    @Column(name= "koperType", columnDefinition = "enum('PATICULIER', 'BEDRIJF', 'PERS' )")
+    @Enumerated(EnumType.STRING)
+    private KoperTypes type;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -52,11 +53,11 @@ public class Koper {
         this.naam = naam;
     }
 
-    public String getType() {
+    public KoperTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(KoperTypes type) {
         this.type = type;
     }
 
