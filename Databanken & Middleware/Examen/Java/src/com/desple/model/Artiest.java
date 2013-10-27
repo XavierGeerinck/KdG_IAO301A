@@ -21,6 +21,9 @@ public class Artiest {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="naam")
+    private String naam;
+
     @Column(name="bio")
     private String bio;
 
@@ -33,6 +36,14 @@ public class Artiest {
 
     public int getId() {
         return id;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
 
     public String getBio() {
@@ -49,5 +60,10 @@ public class Artiest {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    @Override
+    public String toString() {
+        return naam;
     }
 }

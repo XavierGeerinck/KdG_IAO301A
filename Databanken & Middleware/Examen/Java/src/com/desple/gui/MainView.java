@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 public class MainView extends JFrame {
     private JButton btnCreateTicket;
     private JButton btnPassageView;
+    private JButton btnSearchFestivalsView;
+    private JButton btnSearchOptredenView;
 
     public MainView() {
         setTitle("Festival App");
@@ -30,6 +32,8 @@ public class MainView extends JFrame {
     private void initComponents() {
         btnCreateTicket = new JButton("Create Ticket");
         btnPassageView = new JButton("Passage View");
+        btnSearchFestivalsView = new JButton("Search Festival");
+        btnSearchOptredenView = new JButton("Search Optredens");
     }
 
     private void addComponents() {
@@ -40,6 +44,8 @@ public class MainView extends JFrame {
         pMain.setOpaque(true);
         pMain.add(btnCreateTicket);
         pMain.add(btnPassageView);
+        pMain.add(btnSearchFestivalsView);
+        pMain.add(btnSearchOptredenView);
 
         setContentPane(pMain);
     }
@@ -60,6 +66,24 @@ public class MainView extends JFrame {
             public void actionPerformed(ActionEvent e) {
             CreatePassageView cpv = new CreatePassageView();
             cpv.setVisible(true);
+            }
+        });
+
+        btnSearchFestivalsView.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SearchFestivalsView sfv = new SearchFestivalsView();
+                sfv.setVisible(true);
+            }
+        });
+
+        btnSearchOptredenView.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SearchOptredenView sov = new SearchOptredenView();
+                sov.setVisible(true);
             }
         });
     }
