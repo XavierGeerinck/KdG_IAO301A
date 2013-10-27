@@ -18,22 +18,14 @@ import java.awt.event.ActionListener;
  */
 public class CreateTicketView extends JFrame {
     private JButton btnOrder;
-    private JLabel lblSoort;
-    private JTextField txtSoort;
-    private JLabel lblFestDag;
-    private JTextField txtFestDag;
     private JLabel lblKoperNaam;
     private JTextField txtKoperNaam;
     private JLabel lblKoperType;
     private JTextField txtKoperType;
-    private JLabel lblFest;
-    private JTextField txtFest;
     private JLabel lblFestivals;
     private JComboBox<Festival> cmbFestivals;
     private JLabel lblFestivalDagen;
     private JComboBox<FestivalDag> cmbFestivalDagen;
-    private JLabel lblZones;
-    private JComboBox<Zone> cmbZones;
     private JLabel lblTicketTypes;
     private JComboBox<TicketType> cmbTicketTypes;
 
@@ -50,18 +42,6 @@ public class CreateTicketView extends JFrame {
 
     private void initComponents() {
         btnOrder = new JButton("Order");
-
-        lblSoort = new JLabel("Soort: ", JLabel.TRAILING);
-        txtSoort = new JTextField(10);
-        lblSoort.setLabelFor(txtSoort);
-
-        lblFest = new JLabel("Festival: ", JLabel.TRAILING);
-        txtFest = new JTextField();
-        lblFest.setLabelFor(txtFest);
-
-        lblFestDag = new JLabel("Festival Dag: ", JLabel.TRAILING);
-        txtFestDag = new JTextField(10);
-        lblFestDag.setLabelFor(txtFestDag);
 
         lblKoperNaam = new JLabel("Koper: ", JLabel.TRAILING);
         txtKoperNaam = new JTextField(10);
@@ -92,21 +72,11 @@ public class CreateTicketView extends JFrame {
 
         lblFestivalDagen.setLabelFor(cmbFestivalDagen);
 
-        // Zones
-        lblZones = new JLabel("Zones", JLabel.TRAILING);
-        cmbZones = new JComboBox<Zone>();
-
-        for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
-            cmbZones.addItem(z);
-        }
-
-        lblZones.setLabelFor(cmbZones);
-
         // Ticket Type
         lblTicketTypes = new JLabel("Ticket Types", JLabel.TRAILING);
         cmbTicketTypes = new JComboBox<TicketType>();
 
-        for (TicketType tp : TicketTypeService.getTicketTypes((Zone)cmbZones.getSelectedItem())) {
+        for (TicketType tp : TicketTypeService.getTicketTypes((Festival) cmbFestivals.getSelectedItem())) {
             cmbTicketTypes.addItem(tp);
         }
 
@@ -121,12 +91,8 @@ public class CreateTicketView extends JFrame {
         p.add(cmbFestivals);
         p.add(lblFestivalDagen);
         p.add(cmbFestivalDagen);
-        p.add(lblSoort);
-        p.add(txtSoort);
-        p.add(lblFest);
-        p.add(txtFest);
-        p.add(lblFestDag);
-        p.add(txtFestDag);
+        p.add(lblTicketTypes);
+        p.add(cmbTicketTypes);;
         p.add(lblKoperNaam);
         p.add(txtKoperNaam);
         p.add(lblKoperType);
@@ -134,7 +100,7 @@ public class CreateTicketView extends JFrame {
 
         // Layout the panel
         // makeCompactGrid(panel, rows, cols, initX, initY, paddingX, paddingY
-        SpringUtilities.makeCompactGrid(p, 7, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(p, 9, 2, 5, 5, 5, 5);
 
         p.setOpaque(true);
 
@@ -151,13 +117,27 @@ public class CreateTicketView extends JFrame {
     }
 
     private void addListeners() {
+        // On pressing order
         btnOrder.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get festival dag
+                // Create a new ticket koper
+                Koper koper = new Koper();
+                koper.setNaam(txtKoperNaam.getText());
+                koper.setType(txtKoperType.getText());
+
+                TicketOrder ticketOrder = new TicketOrder();
+                ticketOrder.setKoper(koper);
+                ticketOrder.setVerkoopsWijze("Manual Added");
+
                 Ticket ticket = new Ticket();
+                ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
+                ticket.setTicketOrder(ticketOrder);
                 ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
+                ticket.setBarcode("8711700735178");
+
+
 
                 /*ticket.setSoort();
                 ticket.setTicketOrder();
@@ -178,11 +158,11 @@ public class CreateTicketView extends JFrame {
                     cmbFestivalDagen.addItem(fd);
                 }
 
-                // Update zones
-                cmbZones.removeAllItems();
+                // Update ticket types
+                cmbTicketTypes.removeAllItems();
 
-                for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
-                    cmbZones.addItem(z);
+                for (TicketType tt : TicketTypeService.getTicketTypes((Festival) cmbTicketTypes.getSelectedItem())) {
+                    cmbTicketTypes.addItem(tt);
                 }
             }
         });

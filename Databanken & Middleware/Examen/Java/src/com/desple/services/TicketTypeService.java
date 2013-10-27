@@ -17,15 +17,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class TicketTypeService {
-    public static List<TicketType> getTicketTypes(Zone z) {
+    public static List<TicketType> getTicketTypes(Festival f) {
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         // Create a query
-        Query query = session.createQuery("from TicketType where zone = :zone");
+        Query query = session.createQuery("from TicketType where festival = :festival");
 
         // Bind params
-        query.setParameter("zone", z);
+        query.setParameter("festival", f);
 
         // Get result
         List<TicketType> results = query.list();

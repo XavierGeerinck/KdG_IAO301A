@@ -21,9 +21,6 @@ public class Ticket {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="soort")
-    private String soort;
-
     @Column(name="barcode")
     private String barcode;
 
@@ -47,14 +44,6 @@ public class Ticket {
 
     public int getId() {
         return id;
-    }
-
-    public String getSoort() {
-        return soort;
-    }
-
-    public void setSoort(String soort) {
-        this.soort = soort;
     }
 
     public String getBarcode() {
