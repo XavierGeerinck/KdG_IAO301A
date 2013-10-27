@@ -104,9 +104,24 @@ public class TestData {
         cal.add(Calendar.MINUTE, duur);
         Optreden optreden = new Optreden();
         optreden.setDuur(duur);
+        optreden.setFestivalDag(dag);
+        optreden.setTijdstip(cal.getTime());
+        optreden.setSoundCheck(true);
+        optreden.setBenodigdeApparatuur(generateAperatuur());
 
         return cal;
 
 
+    }
+
+    private BenodigdeApparatuur generateAperatuur(){
+        int aantalMicros = random.nextInt(3)+1;
+        int geluidsVersterking = random.nextInt(20) + 1;
+        int lichten = random.nextInt(20) + 1;
+        BenodigdeApparatuur apparatuur = new BenodigdeApparatuur();
+        apparatuur.setGeluidsVersterking(geluidsVersterking);
+        apparatuur.setLicht(lichten);
+        apparatuur.setMicro(aantalMicros);
+        return apparatuur;
     }
 }

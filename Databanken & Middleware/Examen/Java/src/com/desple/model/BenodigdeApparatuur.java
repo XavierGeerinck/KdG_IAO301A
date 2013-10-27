@@ -22,13 +22,13 @@ public class BenodigdeApparatuur {
     private int id;
 
     @Column(name="micro")
-    private boolean micro;
+    private int micro;
 
     @Column(name="geluids_versterking")
-    private boolean geluidsVersterking;
+    private int geluidsVersterking;
 
     @Column(name="licht")
-    private boolean licht;
+    private int licht;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -42,27 +42,27 @@ public class BenodigdeApparatuur {
         return id;
     }
 
-    public boolean isMicro() {
+    public int getMicro() {
         return micro;
     }
 
-    public void setMicro(boolean micro) {
+    public void setMicro(int micro) {
         this.micro = micro;
     }
 
-    public boolean isGeluidsVersterking() {
+    public int getGeluidsVersterking() {
         return geluidsVersterking;
     }
 
-    public void setGeluidsVersterking(boolean geluidsVersterking) {
+    public void setGeluidsVersterking(int geluidsVersterking) {
         this.geluidsVersterking = geluidsVersterking;
     }
 
-    public boolean isLicht() {
+    public int getLicht() {
         return licht;
     }
 
-    public void setLicht(boolean licht) {
+    public void setLicht(int licht) {
         this.licht = licht;
     }
 

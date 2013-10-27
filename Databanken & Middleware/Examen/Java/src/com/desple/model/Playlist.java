@@ -38,6 +38,10 @@ public class Playlist {
     @JoinColumn(name="id")
     private Set<Optreden> optreden = new HashSet<Optreden>();
 
+    @ManyToMany(mappedBy = "playlists")
+    private Set<Song> songs = new HashSet<Song>();
+
+
     public Playlist() {
     }
 

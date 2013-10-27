@@ -24,19 +24,31 @@ public class Song {
     @Column(name="title")
     private String title;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="albumId")
-    private Set<Song> songs = new HashSet<Song>();
+    @Column(name="duur")
+    private double duur;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="song_playlist", joinColumns = {
-            @JoinColumn(name="song_id") }, inverseJoinColumns = {
-            @JoinColumn(name="playlist_id") })
+    @JoinTable(name="song_playlist",
+            joinColumns = {@JoinColumn(name="song_id") },
+            inverseJoinColumns = {@JoinColumn(name="playlist_id") })
     private Set<Playlist> playlists = new HashSet<Playlist>();
 
     public Song() {
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public double getDuur() {
+        return duur;
+    }
+
+    public void setDuur(double duur) {
+        this.duur = duur;
+    }
 }
