@@ -20,7 +20,7 @@ import java.util.Set;
 public class TicketOrder {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     private String verkoopsWijze;

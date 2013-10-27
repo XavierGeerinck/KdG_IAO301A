@@ -17,7 +17,7 @@ import java.util.*;
 public class Festival {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     @Column(name="naam")

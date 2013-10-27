@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +29,8 @@ public class CreateTicketView extends JFrame {
     private JComboBox<FestivalDag> cmbFestivalDagen;
     private JLabel lblTicketTypes;
     private JComboBox<TicketType> cmbTicketTypes;
+    private JLabel lblAmountOfTickets;
+    private JTextField txtAmountOfTickets;
 
     public CreateTicketView() {
         setTitle("Create Ticket");
@@ -50,6 +53,10 @@ public class CreateTicketView extends JFrame {
         lblKoperType = new JLabel("KoperType: ", JLabel.TRAILING);
         txtKoperType = new JTextField(10);
         lblKoperType.setLabelFor(txtKoperType);
+
+        lblAmountOfTickets = new JLabel("Amount Of Tickets: ", JLabel.TRAILING);
+        txtAmountOfTickets = new JTextField(10);
+        lblAmountOfTickets.setLabelFor(txtAmountOfTickets);
 
         // Festival Dropdown
         lblFestivals = new JLabel("Festival: ", JLabel.TRAILING);
@@ -92,15 +99,17 @@ public class CreateTicketView extends JFrame {
         p.add(lblFestivalDagen);
         p.add(cmbFestivalDagen);
         p.add(lblTicketTypes);
-        p.add(cmbTicketTypes);;
+        p.add(cmbTicketTypes);
         p.add(lblKoperNaam);
         p.add(txtKoperNaam);
         p.add(lblKoperType);
         p.add(txtKoperType);
+        p.add(lblAmountOfTickets);
+        p.add(txtAmountOfTickets);
 
         // Layout the panel
         // makeCompactGrid(panel, rows, cols, initX, initY, paddingX, paddingY
-        SpringUtilities.makeCompactGrid(p, 9, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(p, 6, 2, 5, 5, 5, 5);
 
         p.setOpaque(true);
 
@@ -122,6 +131,15 @@ public class CreateTicketView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("Test");
+                // Check if everything is set
+                if (txtKoperNaam.getText().equals("") || txtKoperType.getText().equals("")
+                        || cmbTicketTypes.getSelectedItem() == null || cmbFestivalDagen.getSelectedItem() == null
+                        || cmbFestivals.getSelectedItem() == null) {
+                    JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "Invalid Details", JOptionPane.ERROR_MESSAGE);
+                    throw new NullPointerException("Invalid details.");
+                }
+
                 // Create a new ticket koper
                 Koper koper = new Koper();
                 koper.setNaam(txtKoperNaam.getText());
@@ -131,18 +149,18 @@ public class CreateTicketView extends JFrame {
                 ticketOrder.setKoper(koper);
                 ticketOrder.setVerkoopsWijze("Manual Added");
 
-                Ticket ticket = new Ticket();
-                ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
-                ticket.setTicketOrder(ticketOrder);
-                ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
-                ticket.setBarcode("8711700735178");
+                ArrayList<Ticket> tickets = new ArrayList();
 
+                for (int i = 0; i < (int)Integer.parseInt(txtAmountOfTickets.getText()); i++) {
+                    Ticket ticket = new Ticket();
+                    ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
+                    ticket.setTicketOrder(ticketOrder);
+                    ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
+                    ticket.setBarcode("8711700735178");
+                }
 
-
-                /*ticket.setSoort();
-                ticket.setTicketOrder();
-                ticket.setTicketType();
-                VerkoopService.registerOrder();  */
+                // Save tickets
+                VerkoopService.registerOrder(tickets);
             }
         });
 
