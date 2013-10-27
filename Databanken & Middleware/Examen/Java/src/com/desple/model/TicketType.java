@@ -29,8 +29,13 @@ public class TicketType {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="festivalId")
+    private Festival festival;
+
+    @OneToMany
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="zoneId")
-    private Zone zone;
+    private Set<Zone> zones = new HashSet<Zone>();
 
     public TicketType() {
     }
@@ -55,11 +60,19 @@ public class TicketType {
         this.type = type;
     }
 
-    public Zone getZone() {
-        return zone;
+    public Festival getFestival() {
+        return festival;
     }
 
-    public void setZone(Zone zone) {
-        this.zone = zone;
+    public void setFestivalId(Festival festival) {
+        this.festival = festival;
+    }
+
+    public Set<Zone> getZones() {
+        return zones;
+    }
+
+    public void setZones(Set<Zone> zones) {
+        this.zones = zones;
     }
 }
