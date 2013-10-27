@@ -3,14 +3,13 @@ package com.desple.gui;
 import com.desple.model.*;
 import com.desple.services.*;
 import com.desple.util.SpringUtilities;
+import net.sourceforge.jdatepicker.DateModel;
+import net.sourceforge.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -87,6 +86,72 @@ public class SearchFestivalsView extends JFrame {
                 } else {
                     // Search Festivals
                     try {
+                        /*JDatePicker jdp = new JDatePicker() {
+                            @Override
+                            public void setTextEditable(boolean b) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public boolean isTextEditable() {
+                                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void setButtonFocusable(boolean b) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public boolean getButtonFocusable() {
+                                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void setShowYearButtons(boolean b) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public boolean isShowYearButtons() {
+                                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void setDoubleClickAction(boolean b) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public boolean isDoubleClickAction() {
+                                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public DateModel<?> getModel() {
+                                return null;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void addActionListener(ActionListener actionListener) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void removeActionListener(ActionListener actionListener) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public Properties getI18nStrings() {
+                                return null;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            @Override
+                            public void setI18nStrings(Properties properties) {
+                                //To change body of implemented methods use File | Settings | File Templates.
+                            }
+                        }  */
                         // Dates
                         Date date1 = new Date();
                         Date date2 = new Date();
