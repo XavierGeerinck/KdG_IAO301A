@@ -1,6 +1,5 @@
 package com.desple.services;
 
-import com.desple.model.Bezoeker;
 import com.desple.model.Tracking;
 import com.desple.model.Zone;
 import com.desple.util.HibernateUtil;
@@ -18,15 +17,14 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TrackingService {
-    public synchronized static void savePassage(Bezoeker bezoeker, Zone zone, int inOut) {
+    public synchronized static void savePassage(Zone zone, int inOut) {
         // Validation
-        if (bezoeker == null || zone == null) {
+        if (zone == null) {
             throw new NullPointerException("Bezoeker or zone are null.");
         }
 
         // Create a tracking based on the bezoeker, the zone and inOut
         Tracking tracking = new Tracking();
-        tracking.setBezoeker(bezoeker);
         tracking.setInOut(inOut);
         tracking.setZone(zone);
         tracking.setTimestamp(new Date());

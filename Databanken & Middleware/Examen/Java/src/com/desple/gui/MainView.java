@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class MainView extends JFrame {
     private JButton btnCreateTicket;
+    private JButton btnPassageView;
 
     public MainView() {
         setTitle("Festival App");
@@ -28,6 +29,7 @@ public class MainView extends JFrame {
 
     private void initComponents() {
         btnCreateTicket = new JButton("Create Ticket");
+        btnPassageView = new JButton("Passage View");
     }
 
     private void addComponents() {
@@ -37,6 +39,7 @@ public class MainView extends JFrame {
         // Add the spring layour and the button
         pMain.setOpaque(true);
         pMain.add(btnCreateTicket);
+        pMain.add(btnPassageView);
 
         setContentPane(pMain);
     }
@@ -46,8 +49,17 @@ public class MainView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                CreateTicketView ctv = new CreateTicketView();
-                ctv.setVisible(true);
+            CreateTicketView ctv = new CreateTicketView();
+            ctv.setVisible(true);
+            }
+        });
+
+        btnPassageView.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            CreatePassageView cpv = new CreatePassageView();
+            cpv.setVisible(true);
             }
         });
     }

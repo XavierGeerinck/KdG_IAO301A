@@ -71,4 +71,9 @@ public class Zone {
     public void addTicketType(TicketType ticketType){
         ticketTypes.add(ticketType);
     }
+
+    @Override
+    public String toString() {
+        return zoneType.name();
+    }
 }

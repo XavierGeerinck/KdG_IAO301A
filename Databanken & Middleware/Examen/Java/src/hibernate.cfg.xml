@@ -47,7 +47,6 @@
         -->
         <mapping class="com.desple.model.Artiest"/>
         <mapping class="com.desple.model.BenodigdeApparatuur"/>
-        <mapping class="com.desple.model.Bezoeker"/>
         <mapping class="com.desple.model.Festival"/>
         <mapping class="com.desple.model.FestivalDag"/>
         <mapping class="com.desple.model.Koper"/>

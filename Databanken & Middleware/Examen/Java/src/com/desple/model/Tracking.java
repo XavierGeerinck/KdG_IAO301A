@@ -31,11 +31,6 @@ public class Tracking {
     private int inOut;
 
     @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="bezoekerId")
-    private Bezoeker bezoeker;
-
-    @ManyToOne
     @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
     @JoinColumn(name="zoneId")
     private Zone zone;
@@ -61,14 +56,6 @@ public class Tracking {
 
     public void setInOut(int inOut) {
         this.inOut = inOut;
-    }
-
-    public Bezoeker getBezoeker() {
-        return bezoeker;
-    }
-
-    public void setBezoeker(Bezoeker bezoeker) {
-        this.bezoeker = bezoeker;
     }
 
     public Zone getZone() {

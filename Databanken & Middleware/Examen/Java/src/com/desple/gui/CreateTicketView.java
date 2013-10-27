@@ -34,7 +34,7 @@ public class CreateTicketView extends JFrame {
 
     public CreateTicketView() {
         setTitle("Create Ticket");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); // Center GUI
 
         initComponents();
@@ -133,37 +133,41 @@ public class CreateTicketView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Check if everything is set
                 if (txtKoperNaam.getText().equals("") || txtKoperType.getText().equals("")
+                        || txtAmountOfTickets.getText().equals("")
                         || cmbTicketTypes.getSelectedItem() == null || cmbFestivalDagen.getSelectedItem() == null
                         || cmbFestivals.getSelectedItem() == null) {
                     JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "Invalid Details", JOptionPane.ERROR_MESSAGE);
-                    throw new NullPointerException("Invalid details.");
+                } else {
+                    // Create a new ticket koper
+                    Koper koper = new Koper();
+                    koper.setNaam(txtKoperNaam.getText());
+                    koper.setType(txtKoperType.getText());
+
+                    TicketOrder ticketOrder = new TicketOrder();
+                    ticketOrder.setKoper(koper);
+                    ticketOrder.setVerkoopsWijze("Manual Added");
+
+                    ArrayList<Ticket> tickets = new ArrayList();
+
+                    for (int i = 0; i < (int)Integer.parseInt(txtAmountOfTickets.getText()); i++) {
+                        Ticket ticket = new Ticket();
+                        ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
+                        ticket.setTicketOrder(ticketOrder);
+                        ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
+                        ticket.setBarcode("8711700735178");
+
+                        tickets.add(ticket);
+                    }
+
+                    // Save tickets
+                    try {
+                        VerkoopService.registerOrder(koper, ticketOrder, tickets);
+
+                        JOptionPane.showMessageDialog(getContentPane(), "Created " + txtAmountOfTickets.getText() + " tickets.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(getContentPane(), ex.getMessage(), "Invalid Details", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-
-                // Create a new ticket koper
-                Koper koper = new Koper();
-                koper.setNaam(txtKoperNaam.getText());
-                koper.setType(txtKoperType.getText());
-
-                TicketOrder ticketOrder = new TicketOrder();
-                ticketOrder.setKoper(koper);
-                ticketOrder.setVerkoopsWijze("Manual Added");
-
-                ArrayList<Ticket> tickets = new ArrayList();
-
-                for (int i = 0; i < (int)Integer.parseInt(txtAmountOfTickets.getText()); i++) {
-                    System.out.println("Created ticket: 8711700735178");
-                    Ticket ticket = new Ticket();
-                    ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
-                    ticket.setTicketOrder(ticketOrder);
-                    ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
-                    ticket.setBarcode("8711700735178");
-
-                    tickets.add(ticket);
-                }
-
-                // Save tickets
-                System.out.println("Ordering tickets");
-                VerkoopService.registerOrder(koper, ticketOrder, tickets);
             }
         });
 
