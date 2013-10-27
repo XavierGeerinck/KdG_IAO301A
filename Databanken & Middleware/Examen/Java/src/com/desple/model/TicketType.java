@@ -27,6 +27,11 @@ public class TicketType {
     @Column(name="type")
     private String type;
 
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="zoneId")
+    private Zone zone;
+
     public TicketType() {
     }
 
@@ -48,5 +53,13 @@ public class TicketType {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }
