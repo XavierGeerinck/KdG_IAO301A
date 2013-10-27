@@ -16,7 +16,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class FestivalDagService {
-    public static List<FestivalDag> getFestivalDagen(Festival f) {
+    public synchronized static List<FestivalDag> getFestivalDagen(Festival f) {
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -28,6 +28,9 @@ public class FestivalDagService {
 
         // Get result
         List<FestivalDag> results = query.list();
+
+        // Close session
+        session.close();
 
         return results;
     }

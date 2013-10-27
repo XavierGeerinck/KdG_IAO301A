@@ -19,7 +19,7 @@ import java.util.Set;
 public class Optreden {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="tijdstip")

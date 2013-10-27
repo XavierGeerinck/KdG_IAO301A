@@ -19,7 +19,7 @@ import java.util.Set;
 public class FestivalDag {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="datum")
@@ -51,5 +51,10 @@ public class FestivalDag {
 
     public void setFestival(Festival festival) {
         this.festival = festival;
+    }
+
+    @Override
+    public String toString() {
+        return datum.toString();
     }
 }

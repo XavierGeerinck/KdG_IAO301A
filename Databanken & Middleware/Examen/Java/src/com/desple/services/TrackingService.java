@@ -18,7 +18,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TrackingService {
-    public static void savePassage(Bezoeker bezoeker, Zone zone, int inOut) {
+    public synchronized static void savePassage(Bezoeker bezoeker, Zone zone, int inOut) {
         // Validation
         if (bezoeker == null || zone == null) {
             throw new NullPointerException("Bezoeker or zone are null.");

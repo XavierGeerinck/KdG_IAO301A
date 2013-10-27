@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class OptredenService {
-    public static List<Optreden> findOptredenByDateAndZone(Date date, Zone zone) {
+    public synchronized static List<Optreden> findOptredenByDateAndZone(Date date, Zone zone) {
         if (date == null || zone == null) {
             throw new NullPointerException("Date or zone can not be null.");
         }
@@ -34,6 +34,9 @@ public class OptredenService {
 
         // Get result
         List<Optreden> results = query.list();
+
+        // Close the session
+        session.close();
 
         return results;
     }
