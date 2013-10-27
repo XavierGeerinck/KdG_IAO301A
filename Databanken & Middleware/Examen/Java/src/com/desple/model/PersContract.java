@@ -14,7 +14,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="pers_contract")
+@Table(name="persContract")
 public class PersContract {
 
     @Id
@@ -32,12 +32,12 @@ public class PersContract {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="optreden_id")
+    @JoinColumn(name="optredenId")
     private Optreden optredenId;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="koper_id")
+    @JoinColumn(name="koperId")
     private Koper koperId;
 
     public PersContract() {

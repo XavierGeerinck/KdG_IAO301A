@@ -32,7 +32,7 @@ public class BenodigdeApparatuur {
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @JoinColumn(name="optredenId")
     private Set<Optreden> optredens = new HashSet<Optreden>();
 
     public BenodigdeApparatuur() {

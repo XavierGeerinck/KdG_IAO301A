@@ -1,6 +1,9 @@
 package com.desple.testData;
 
 import com.desple.model.*;
+import com.desple.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -8,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -22,10 +26,12 @@ import java.util.Random;
 public class TestData {
     private String csvFile;
     private Random random;
+    private Session session;
 
     public TestData(String csvFile) {
         this.csvFile = csvFile;
         random = new Random();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
         readCsv();
     }
 
@@ -48,13 +54,17 @@ public class TestData {
                     festival.setNaam(festivalString[0]);
                     festival.setLocatie(festivalString[1]);
                     festival.setStartDate(sdf.parse(festivalString[2]));
+                    Transaction tx = session.beginTransaction();
+                    session.saveOrUpdate(festival);
+                    tx.commit();
+
 
                     int amountDays = random.nextInt(4);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(festival.getStartDate());
                     cal.add(Calendar.DATE, amountDays);
                     festival.setEindDate(cal.getTime());
-
+                    //ArrayList<Zone> zones= generateZones(festival);
                     generateTicketTypes(amountDays, festival, counter);
 
                     for(int i=0; i<amountDays; i++){
@@ -82,15 +92,26 @@ public class TestData {
         }
     }
 
-    private void generateTicketTypes(int amountDays, Festival festival, int multiplier) {
+    private void generateZones(Festival festival, ArrayList<TicketType> ticketTypes) {
+        for(ZoneTypes type : ZoneTypes.values()){
+            Zone zone = new Zone();
+            zone.setFestival(festival);
+            zone.setZoneType(type);
+        }
+    }
+
+    private ArrayList<TicketType> generateTicketTypes(int amountDays, Festival festival, int multiplier) {
+        ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
         TicketType normalTicket = new TicketType();
         normalTicket.setType(TicketTypes.NORMAL);
         normalTicket.setFestivalId(festival);
         normalTicket.setPrijs(50 + (multiplier*5));
-
+        ticketTypes.add(normalTicket);
+        //TicketType
         if (amountDays > 1){
 
         }
+        return ticketTypes;
     }
 
     private void generateFestivalDays(Date festivalDate, int day, Festival festival){

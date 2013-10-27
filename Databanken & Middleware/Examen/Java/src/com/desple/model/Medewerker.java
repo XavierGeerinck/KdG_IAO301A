@@ -31,9 +31,9 @@ public class Medewerker {
     private double uurloon;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="medewerker_taak", joinColumns = {
-            @JoinColumn(name="medewerker_id") }, inverseJoinColumns = {
-            @JoinColumn(name="taak_id") })
+    @JoinTable(name="medewerkerTaak", joinColumns = {
+            @JoinColumn(name="medewerkerId") }, inverseJoinColumns = {
+            @JoinColumn(name="taakId") })
     private Set<Taak> taken = new HashSet<Taak>();
 
     public Medewerker() {

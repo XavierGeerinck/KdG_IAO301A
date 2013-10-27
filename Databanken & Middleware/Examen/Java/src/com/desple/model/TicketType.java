@@ -33,9 +33,11 @@ public class TicketType {
     @JoinColumn(name="festivalId")
     private Festival festival;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="zoneId")
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="ticketType_zone",
+            joinColumns = {@JoinColumn(name="ticketTypeId") },
+            inverseJoinColumns = {@JoinColumn(name="zoneId") })
     private Set<Zone> zones = new HashSet<Zone>();
 
     public TicketType() {

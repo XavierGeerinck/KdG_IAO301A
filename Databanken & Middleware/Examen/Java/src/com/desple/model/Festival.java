@@ -34,12 +34,12 @@ public class Festival {
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @JoinColumn(name="zoneId")
     private Set<Zone> zones = new HashSet<Zone>();
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @JoinColumn(name="festivalDagId")
     private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
 
     public Festival() {

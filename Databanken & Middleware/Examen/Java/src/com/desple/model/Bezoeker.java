@@ -24,9 +24,7 @@ public class Bezoeker {
     @Column(name="tracking_nummer")
     private String trackingNummer;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @OneToMany(mappedBy = "bezoeker" )
     private Set<Tracking> trackings = new HashSet<Tracking>();
 
     public Bezoeker() {

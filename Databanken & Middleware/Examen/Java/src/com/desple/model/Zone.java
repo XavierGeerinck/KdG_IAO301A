@@ -21,19 +21,17 @@ public class Zone {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @Column(name = "zone_type", columnDefinition = "enum('PODIUM1', 'PODIUM2', 'PUBLIEKPODIUM1', 'PUBLIEKPODIUM2', 'VIP', 'BACKSTAGE', 'SANITAIR', 'CAMPING')")
+    @Column(name = "zoneType", columnDefinition = "enum('PODIUM1', 'PODIUM2', 'PUBLIEKPODIUM1', 'PUBLIEKPODIUM2', 'VIP', 'BACKSTAGE', 'SANITAIR', 'CAMPING')")
     @Enumerated(EnumType.STRING)
-    private String ZoneType;
+    private ZoneTypes zoneType;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name="festivalId")
     private Festival festival;
 
-    @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="ticketTypeId")
-    private TicketType ticketType;
+    @ManyToMany(mappedBy = "zones")
+    private Set<TicketType> ticketTypes;
 
     public Zone() {
     }
@@ -42,12 +40,12 @@ public class Zone {
         return id;
     }
 
-    public String getZoneType() {
-        return ZoneType;
+    public ZoneTypes getZoneType() {
+        return zoneType;
     }
 
-    public void setZoneType(String zoneType) {
-        ZoneType = zoneType;
+    public void setZoneType(ZoneTypes zoneType) {
+        zoneType = zoneType;
     }
 
     public Festival getFestival() {
@@ -58,11 +56,15 @@ public class Zone {
         this.festival = festival;
     }
 
-    public TicketType getTicketType() {
-        return ticketType;
+    public Set<TicketType> getTicketTypes() {
+        return ticketTypes;
     }
 
-    public void setTicketType(TicketType ticketType) {
-        this.ticketType = ticketType;
+    public void setTicketTypes(Set<TicketType> ticketTypes) {
+        this.ticketTypes = ticketTypes;
+    }
+
+    public void addTicketType(TicketType ticketType){
+        ticketTypes.add(ticketType);
     }
 }

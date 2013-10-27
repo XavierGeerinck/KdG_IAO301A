@@ -35,7 +35,7 @@ public class Playlist {
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @JoinColumn(name="optredenId")
     private Set<Optreden> optreden = new HashSet<Optreden>();
 
     @ManyToMany(mappedBy = "playlists")
