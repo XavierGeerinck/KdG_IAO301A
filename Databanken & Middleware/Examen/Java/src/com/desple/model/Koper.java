@@ -18,7 +18,7 @@ import java.util.Set;
 public class Koper {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     @Column(name="naam")
