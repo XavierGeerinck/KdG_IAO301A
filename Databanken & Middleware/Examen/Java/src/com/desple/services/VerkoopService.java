@@ -42,8 +42,12 @@ public class VerkoopService {
             session.save(ticketOrder);
 
             // Save all the tickets
+            // Important note here:
+            // We use merge here because the object Ticket is already in the session
+            // Because of this when we use .save it will throw a  NonUniqueObjectException
+            // TO solve this we use .merge which is going to update the object in the session to the latest one.
             for (Ticket ticket : tickets) {
-                session.save(ticket);
+                session.merge(ticket);
             }
 
             // Commit
