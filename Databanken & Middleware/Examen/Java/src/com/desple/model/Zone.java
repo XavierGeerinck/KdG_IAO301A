@@ -21,7 +21,8 @@ public class Zone {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="zone_type")
+    @Column(name = "zone_type", columnDefinition = "enum('PODIUM1', 'PODIUM2', 'PUBLIEKPODIUM1', 'PUBLIEKPODIUM2', 'VIP', 'BACKSTAGE', 'SANITAIR', 'CAMPING')")
+    @Enumerated(EnumType.STRING)
     private String ZoneType;
 
     @ManyToOne

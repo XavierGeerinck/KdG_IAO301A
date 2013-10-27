@@ -54,9 +54,13 @@ public class TestData {
                     cal.setTime(festival.getStartDate());
                     cal.add(Calendar.DATE, amountDays);
                     festival.setEindDate(cal.getTime());
+
+                    generateTicketTypes(amountDays, festival, counter);
+
                     for(int i=0; i<amountDays; i++){
                         generateFestivalDays(festival.getStartDate(),i, festival);
                     }
+                    counter++;
                 }
 
             }
@@ -75,6 +79,17 @@ public class TestData {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private void generateTicketTypes(int amountDays, Festival festival, int multiplier) {
+        TicketType normalTicket = new TicketType();
+        normalTicket.setType(TicketTypes.NORMAL);
+        normalTicket.setFestivalId(festival);
+        normalTicket.setPrijs(50 + (multiplier*5));
+
+        if (amountDays > 1){
+
         }
     }
 
@@ -132,7 +147,7 @@ public class TestData {
         Ticket ticket = new Ticket();
         ticket.setFestivalDag(dag);
         ticket.setBarcode("8711700735179");
-        ticket.setTicketOrder();
+      //  ticket.setTicketOrder();
 
     }
 }

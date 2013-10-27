@@ -24,8 +24,9 @@ public class TicketType {
     @Column(name="prijs")
     private double prijs;
 
-    @Column(name="type")
-    private String type;
+    @Column(name= "ticketType", columnDefinition = "enum('NORMAL', 'VIP', 'COMBI' )")
+    @Enumerated(EnumType.STRING)
+    private TicketTypes type;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -52,11 +53,11 @@ public class TicketType {
         this.prijs = prijs;
     }
 
-    public String getType() {
+    public TicketTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TicketTypes type) {
         this.type = type;
     }
 
