@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class TicketTypeService {
-    public static List<TicketType> getTicketTypes(Festival f) {
+    public synchronized static List<TicketType> getTicketTypes(Festival f) {
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -29,6 +29,9 @@ public class TicketTypeService {
 
         // Get result
         List<TicketType> results = query.list();
+
+        // Close session
+        session.close();
 
         return results;
     }

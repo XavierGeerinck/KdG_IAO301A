@@ -18,7 +18,7 @@ import java.util.Set;
 public class Bezoeker {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="tracking_nummer")

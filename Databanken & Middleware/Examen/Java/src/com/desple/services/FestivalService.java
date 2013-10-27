@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class FestivalService {
-    public static List<Festival> findFestivalByArtistAndDate(Artiest artiest, Date dateStart, Date dateEnd) {
+    public synchronized static List<Festival> findFestivalByArtistAndDate(Artiest artiest, Date dateStart, Date dateEnd) {
         if (artiest == null || dateStart == null || dateEnd == null) {
             throw new NullPointerException("Date or artiest can not be null.");
         }
@@ -38,10 +38,13 @@ public class FestivalService {
         //List<Optreden> results = query.list();
 
         //return results;
+
+        session.close();
+
         return null;
     }
 
-    public static List<Festival> getFestivals() {
+    public synchronized static List<Festival> getFestivals() {
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -50,6 +53,8 @@ public class FestivalService {
 
         // Get result
         List<Festival> results = query.list();
+
+        session.close();
 
         return results;
     }

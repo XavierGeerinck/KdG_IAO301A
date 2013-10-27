@@ -18,7 +18,7 @@ import java.util.Set;
 public class TicketType {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="prijs")
@@ -77,5 +77,10 @@ public class TicketType {
 
     public void setZones(Set<Zone> zones) {
         this.zones = zones;
+    }
+
+    @Override
+    public String toString() {
+        return type;
     }
 }

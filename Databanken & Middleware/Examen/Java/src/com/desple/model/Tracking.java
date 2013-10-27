@@ -21,7 +21,7 @@ import java.util.Set;
 public class Tracking {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="timestamp")

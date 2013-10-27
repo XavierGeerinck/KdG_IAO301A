@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ZoneService {
-    public static List<Zone> getZonesByFestival(Festival f) {
+    public synchronized static List<Zone> getZonesByFestival(Festival f) {
         // Create session
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -29,6 +29,9 @@ public class ZoneService {
 
         // Get result
         List<Zone> results = query.list();
+
+        // Close the session
+        session.close();
 
         return results;
     }

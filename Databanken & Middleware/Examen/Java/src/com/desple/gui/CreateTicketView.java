@@ -131,7 +131,6 @@ public class CreateTicketView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Test");
                 // Check if everything is set
                 if (txtKoperNaam.getText().equals("") || txtKoperType.getText().equals("")
                         || cmbTicketTypes.getSelectedItem() == null || cmbFestivalDagen.getSelectedItem() == null
@@ -152,15 +151,19 @@ public class CreateTicketView extends JFrame {
                 ArrayList<Ticket> tickets = new ArrayList();
 
                 for (int i = 0; i < (int)Integer.parseInt(txtAmountOfTickets.getText()); i++) {
+                    System.out.println("Created ticket: 8711700735178");
                     Ticket ticket = new Ticket();
                     ticket.setTicketType((TicketType) cmbTicketTypes.getSelectedItem());
                     ticket.setTicketOrder(ticketOrder);
                     ticket.setFestivalDag((FestivalDag)cmbFestivalDagen.getSelectedItem());
                     ticket.setBarcode("8711700735178");
+
+                    tickets.add(ticket);
                 }
 
                 // Save tickets
-                VerkoopService.registerOrder(tickets);
+                System.out.println("Ordering tickets");
+                VerkoopService.registerOrder(koper, ticketOrder, tickets);
             }
         });
 

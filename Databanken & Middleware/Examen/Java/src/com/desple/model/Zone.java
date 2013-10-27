@@ -18,7 +18,7 @@ import java.util.Set;
 public class Zone {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "zoneType", columnDefinition = "enum('PODIUM1', 'PODIUM2', 'PUBLIEKPODIUM1', 'PUBLIEKPODIUM2', 'VIP', 'BACKSTAGE', 'SANITAIR', 'CAMPING')")

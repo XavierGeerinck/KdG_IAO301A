@@ -1,6 +1,8 @@
 package com.desple.services;
 
+import com.desple.model.Koper;
 import com.desple.model.Ticket;
+import com.desple.model.TicketOrder;
 import com.desple.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -17,10 +19,10 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class VerkoopService {
-    public static void registerOrder(ArrayList<Ticket> tickets) {
+    public synchronized static void registerOrder(Koper koper, TicketOrder ticketOrder, ArrayList<Ticket> tickets) {
         // Validation
-        if (tickets == null) {
-            throw new NullPointerException("Tickets is null");
+        if (tickets == null || tickets.isEmpty()) {
+            throw new NullPointerException("Tickets is not set");
         }
 
         // Create session
@@ -30,6 +32,14 @@ public class VerkoopService {
         try {
             // Start transaction
             transaction = session.beginTransaction();
+
+            System.out.println("Saving tickets to db");
+
+            // Save the koper
+            session.save(koper);
+
+            // Save the ticket order
+            session.save(ticketOrder);
 
             // Save all the tickets
             for (Ticket ticket : tickets) {
