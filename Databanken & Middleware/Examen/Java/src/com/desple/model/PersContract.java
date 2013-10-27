@@ -14,7 +14,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="persContract")
+@Table(name="pers_contract")
 public class PersContract {
 
     @Id
