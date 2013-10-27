@@ -54,9 +54,13 @@ public class TestData {
                     cal.setTime(festival.getStartDate());
                     cal.add(Calendar.DATE, amountDays);
                     festival.setEindDate(cal.getTime());
+
+                    generateTicketTypes(amountDays, festival, counter);
+
                     for(int i=0; i<amountDays; i++){
                         generateFestivalDays(festival.getStartDate(),i, festival);
                     }
+                    counter++;
                 }
 
             }
@@ -78,6 +82,17 @@ public class TestData {
         }
     }
 
+    private void generateTicketTypes(int amountDays, Festival festival, int multiplier) {
+        TicketType normalTicket = new TicketType();
+        normalTicket.setType(TicketTypes.NORMAL);
+        normalTicket.setFestivalId(festival);
+        normalTicket.setPrijs(50 + (multiplier*5));
+
+        if (amountDays > 1){
+
+        }
+    }
+
     private void generateFestivalDays(Date festivalDate, int day, Festival festival){
         FestivalDag dag = new FestivalDag();
         Calendar cal = Calendar.getInstance();
@@ -94,6 +109,9 @@ public class TestData {
         endPrevious.set(Calendar.MILLISECOND, 0);
         for(int i = 0; i < aantalOptredens; i++){
             endPrevious = generateOptredens(endPrevious, i, dag);
+        }
+        for(int i=0; i < 7500; i++){
+            generateTickets(dag);
         }
 
 
@@ -123,5 +141,13 @@ public class TestData {
         apparatuur.setLicht(lichten);
         apparatuur.setMicro(aantalMicros);
         return apparatuur;
+    }
+
+    private void generateTickets(FestivalDag dag){
+        Ticket ticket = new Ticket();
+        ticket.setFestivalDag(dag);
+        ticket.setBarcode("8711700735179");
+      //  ticket.setTicketOrder();
+
     }
 }

@@ -1,8 +1,10 @@
 package com.desple.model;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +30,11 @@ public class TicketOrder {
     @JoinColumn(name="koperId")
     private Koper koper;
 
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name="festivalId")
+    private Festival festival;
+
     public TicketOrder() {
     }
 
@@ -49,5 +56,13 @@ public class TicketOrder {
 
     public void setKoper(Koper koper) {
         this.koper = koper;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
     }
 }
