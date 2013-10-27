@@ -15,7 +15,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name="festival_dag")
+@Table(name="festivalDag")
 public class FestivalDag {
 
     @Id

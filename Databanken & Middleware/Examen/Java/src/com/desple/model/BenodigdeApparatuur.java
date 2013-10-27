@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,9 +31,7 @@ public class BenodigdeApparatuur {
     @Column(name="licht")
     private int licht;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="optredenId")
+    @OneToMany(mappedBy = "benodigdeApparatuur")
     private Set<Optreden> optredens = new HashSet<Optreden>();
 
     public BenodigdeApparatuur() {

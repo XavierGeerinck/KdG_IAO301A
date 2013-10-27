@@ -33,9 +33,7 @@ public class Playlist {
     @Column(name="registratieAuteursrecht")
     private boolean registratieAuteursrecht;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="optredenId")
+    @OneToMany(mappedBy = "playlist")
     private Set<Optreden> optreden = new HashSet<Optreden>();
 
     @ManyToMany(mappedBy = "playlists")

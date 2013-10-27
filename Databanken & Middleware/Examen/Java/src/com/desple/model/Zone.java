@@ -30,6 +30,10 @@ public class Zone {
     @JoinColumn(name="festivalId")
     private Festival festival;
 
+    @ManyToOne
+    @JoinColumn(name="bijhorendeZone")
+    private Zone zone;
+
     @ManyToMany(mappedBy = "zones")
     private Set<TicketType> ticketTypes;
 

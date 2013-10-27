@@ -81,6 +81,6 @@ public class TicketType {
 
     @Override
     public String toString() {
-        return type;
+        return type.toString();
     }
 }
