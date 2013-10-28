@@ -121,20 +121,20 @@ public class TestData {
     }
 
     private void generateZones(Festival festival, ArrayList<TicketType> ticketTypes) {
-        for(EZoneTypes zoneType : EZoneTypes.values()){
+        for(EZoneType zoneType : EZoneType.values()){
             Zone zone = new Zone();
             zone.setFestival(festival);
-            zone.setZoneType(zoneType);
+            zone.setType(zoneType);
             for(TicketType ticketType : ticketTypes){
-                if(zoneType == EZoneTypes.VIP )  {
+                if(zoneType == EZoneType.VIP )  {
                     if( ETicketType.VIP == ticketType.getType() ){
                         zone.addTicketType(ticketType);
                     }
-                } else if(zoneType == EZoneTypes.BACKSTAGE){
+                } else if(zoneType == EZoneType.BACKSTAGE){
                     if( ETicketType.PERS == ticketType.getType()){
                         zone.addTicketType(ticketType);
                     }
-                } else if(zoneType == EZoneTypes.CAMPING){
+                } else if(zoneType == EZoneType.CAMPING){
                     if( ETicketType.COMBI == ticketType.getType()){
                         zone.addTicketType(ticketType);
                     }

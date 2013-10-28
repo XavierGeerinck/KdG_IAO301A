@@ -5,13 +5,6 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="zone")
 public class Zone {
@@ -22,7 +15,7 @@ public class Zone {
 
     @Column(name = "zone_type")
     @Enumerated(EnumType.STRING)
-    private EZoneTypes zoneType;
+    private EZoneType type;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -43,12 +36,20 @@ public class Zone {
         return id;
     }
 
-    public EZoneTypes getZoneType() {
-        return zoneType;
+    public Zone getZone() {
+        return zone;
     }
 
-    public void setZoneType(EZoneTypes zoneType) {
-        zoneType = zoneType;
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
+
+    public EZoneType getType() {
+        return type;
+    }
+
+    public void setType(EZoneType type) {
+        this.type = type;
     }
 
     public Festival getFestival() {
@@ -73,6 +74,6 @@ public class Zone {
 
     @Override
     public String toString() {
-        return zoneType.name();
+        return type.name();
     }
 }
