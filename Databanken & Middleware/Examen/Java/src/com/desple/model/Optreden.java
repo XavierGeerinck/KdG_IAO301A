@@ -26,17 +26,17 @@ public class Optreden {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="fest_dag_id")
+    @JoinColumn(name="fest_dag_id", nullable = false)
     private FestivalDag festivalDag;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="playlist_id")
+    @JoinColumn(name="playlist_id", nullable = false)
     private Playlist playlist;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="zone_id")
+    @JoinColumn(name="zone_id", nullable = false)
     private Zone zone;
 
     @ManyToOne
@@ -105,5 +105,10 @@ public class Optreden {
 
     public void setBenodigdeApparatuur(BenodigdeApparatuur benodigdeApparatuur) {
         this.benodigdeApparatuur = benodigdeApparatuur;
+    }
+
+    @Override
+    public String toString() {
+        return playlist.getNaam() + " - " + zone.toString();
     }
 }
