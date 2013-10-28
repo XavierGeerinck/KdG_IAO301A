@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<festival naam="tomorrowland">
+	<locatie>Wilrijk</locatie>
+	<start>28/10/2013</start>
+	<end>29/10/2013</end>
+	<dag id="1">
+		<artiesten>
+			<artiest>
+				<naam>avicii</naam>
+				<tijd_beschikbaar>19:00</tijd_beschikbaar>
+				<start>20:00</start>
+				<end>22:00</end>
+				<zone>PODIUM1</zone>
+				<mag_filmen>true</mag_filmen>
+				<mag_foto>true</mag_foto>
+			</artiest>
+			<artiest>
+				<naam>armin van buuren</naam>
+				<tijd_beschikbaar>21:00</tijd_beschikbaar>
+				<start>22:00</start>
+				<end>24:00</end>
+				<zone>PODIUM1</zone>
+				<mag_filmen>true</mag_filmen>
+				<mag_foto>true</mag_foto>
+			</artiest>
+		</artiesten>
+	</dag>
+	<dag id="2">
+		<artiesten>
+			<artiest>
+				<naam>sean paul</naam>
+				<tijd_beschikbaar>17:00</tijd_beschikbaar>
+				<start>18:00</start>
+				<end>20:00</end>
+				<zone>PODIUM1</zone>
+				<mag_filmen>false</mag_filmen>
+				<mag_foto>true</mag_foto>
+			</artiest>
+		</artiesten>
+	</dag>
+</festival>
