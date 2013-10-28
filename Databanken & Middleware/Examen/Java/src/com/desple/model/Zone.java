@@ -3,6 +3,7 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,7 @@ public class Zone {
     private Zone zone;
 
     @ManyToMany(mappedBy = "zones")
-    private Set<TicketType> ticketTypes;
+    private Set<TicketType> ticketTypes = new HashSet<TicketType>();
 
     public Zone() {
     }

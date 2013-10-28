@@ -21,9 +21,7 @@ public class Koper {
     @Enumerated(EnumType.STRING)
     private EKoperType type;
 
-    @OneToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="id")
+    @OneToMany(mappedBy = "koper")
     private Set<TicketOrder> ticketOrders = new HashSet<TicketOrder>();
 
     @OneToMany

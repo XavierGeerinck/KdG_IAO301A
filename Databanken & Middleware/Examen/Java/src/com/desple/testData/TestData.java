@@ -28,6 +28,10 @@ public class TestData {
     private Session session;
     private ArrayList<Festival> festivals;
     private ArrayList<Koper> kopers;
+    private ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
+    private ArrayList<Zone> zones = new ArrayList<Zone>();
+    private int trackingNummer = 0;
+    private int persCounter = 0;
 
     public TestData(String url) {
         String csvFile1 = url + "festival.csv";
@@ -36,13 +40,15 @@ public class TestData {
         kopers = new ArrayList<Koper>();
         random = new Random();
         session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
         readCsv(csvFile1, 0);
         readCsv(csvFile2, 1);
         run();
+        tx.commit();
     }
 
     private void run() {
-        Transaction tx = session.beginTransaction();
+
         for(int i = 0; i < kopers.size(); i++){
             Koper koper = kopers.get(i);
             if (i <  600){
@@ -62,11 +68,11 @@ public class TestData {
             cal.setTime(festival.getStartDate());
             cal.add(Calendar.DATE, amountDays);
             festival.setEindDate(cal.getTime());
-            ArrayList<TicketType> ticketTypes = generateTicketTypes(amountDays, festival, counter);
-            generateZones(festival, ticketTypes);
+            generateTicketTypes(amountDays, festival, counter);
+            generateZones(festival);
 
             for(int i=0; i<amountDays; i++){
-                generateFestivalDays(festival.getStartDate(),i, festival, ticketTypes);
+                generateFestivalDays(festival.getStartDate(),i, festival);
             }
         }
     }
@@ -120,7 +126,8 @@ public class TestData {
         }
     }
 
-    private void generateZones(Festival festival, ArrayList<TicketType> ticketTypes) {
+    private void generateZones(Festival festival) {
+
         for(EZoneType zoneType : EZoneType.values()){
             Zone zone = new Zone();
             zone.setFestival(festival);
@@ -143,28 +150,33 @@ public class TestData {
                 }
 
             }
+            zones.add(zone);
+            session.saveOrUpdate(zone);
         }
     }
 
-    private ArrayList<TicketType> generateTicketTypes(int amountDays, Festival festival, int multiplier) {
-        ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
+    private void generateTicketTypes(int amountDays, Festival festival, int multiplier) {
         TicketType normalTicket = new TicketType();
         normalTicket.setType(ETicketType.NORMAL);
         normalTicket.setFestivalId(festival);
         normalTicket.setPrijs(50 + (multiplier*5));
         ticketTypes.add(normalTicket);
+        session.saveOrUpdate(normalTicket);
 
         TicketType vipTicket = new TicketType();
         vipTicket.setType(ETicketType.VIP);
         vipTicket.setFestivalId(festival);
         vipTicket.setPrijs((50 + (multiplier*5))* 2);
         ticketTypes.add(vipTicket);
+        session.saveOrUpdate(vipTicket);
 
         TicketType persTicket = new TicketType();
         persTicket.setType(ETicketType.PERS);
         persTicket.setFestivalId(festival);
-        persTicket.setPrijs(50 + (multiplier*5));
+        persTicket.setPrijs(50 + (multiplier * 5));
         ticketTypes.add(persTicket);
+        session.saveOrUpdate(persTicket);
+
         //TicketType
         if (amountDays > 1){
             TicketType combiTicket = new TicketType();
@@ -172,11 +184,11 @@ public class TestData {
             combiTicket.setFestivalId(festival);
             combiTicket.setPrijs((50 + (multiplier*5))* (amountDays - 0.5) );
             ticketTypes.add(combiTicket);
+            session.saveOrUpdate(combiTicket);
         }
-        return ticketTypes;
     }
 
-    private void generateFestivalDays(Date festivalDate, int day, Festival festival, ArrayList<TicketType> ticketTypes){
+    private void generateFestivalDays(Date festivalDate, int day, Festival festival){
         FestivalDag dag = new FestivalDag();
         Calendar cal = Calendar.getInstance();
         cal.setTime(festivalDate);
@@ -190,10 +202,12 @@ public class TestData {
         endPrevious.set(Calendar.MINUTE, 0);
         endPrevious.set(Calendar.SECOND, 0);
         endPrevious.set(Calendar.MILLISECOND, 0);
+
+        generateTicketsAndTracking(dag, ticketTypes);
         for(int i = 0; i < aantalOptredens; i++){
             endPrevious = generateOptredens(endPrevious, i, dag);
         }
-        generateTickets(dag, ticketTypes );
+        session.saveOrUpdate(dag);
 
 
     }
@@ -211,6 +225,13 @@ public class TestData {
         optreden.setEindDate(cal.getTime());
         optreden.setSoundCheck(true);
         optreden.setBenodigdeApparatuur(generateAperatuur());
+        PersContract persContract = new PersContract();
+        persContract.setKoperId(kopers.get(persCounter%kopers.size()));
+        persContract.setMagFoto(random.nextBoolean());
+        persContract.setMagFilmen(random.nextBoolean());
+        persContract.setOptredenId(optreden);
+        session.saveOrUpdate(optreden);
+
 
         return cal;
 
@@ -225,17 +246,18 @@ public class TestData {
         apparatuur.setGeluidsVersterking(geluidsVersterking);
         apparatuur.setLicht(lichten);
         apparatuur.setMicro(aantalMicros);
+        session.saveOrUpdate(apparatuur);
         return apparatuur;
     }
 
-    private void generateTickets(FestivalDag dag, ArrayList<TicketType> ticketTypes){
+    private void generateTicketsAndTracking(FestivalDag dag, ArrayList<TicketType> ticketTypes){
 
         for(int i = 0; i<7500; i++){
-            int chance = random.nextInt(10);
+            trackingNummer++;
+
             Ticket ticket = new Ticket();
             ticket.setFestivalDag(dag);
             ticket.setBarcode("8711700735179");
-            ticket.setFestivalDag(dag);
             if(i == 0){
                 ticket.setTicketType(ticketTypes.get(2));
             }else if (i == 1){
@@ -243,7 +265,13 @@ public class TestData {
             }else if ((i == 2) || (i == 3 ) || ( i == 4) || ( i == 5)){
                 ticket.setTicketType(ticketTypes.get(0));
             }else if ((i == 6) || (i == 7) || ( i == 8) || ( i == 9)){
-                ticket.setTicketType(ticketTypes.get(3));
+                if(ticketTypes.size() >= 4) {
+                    ticket.setTicketType(ticketTypes.get(3));
+                }else{
+                    int chance = random.nextInt(3);
+                    ticket.setTicketType(ticketTypes.get(chance));
+
+                }
             }
             TicketOrder ticketOrder = null;
             if (i < ( 7500 * 0.6)){
@@ -252,6 +280,32 @@ public class TestData {
                 ticketOrder = generateTicketOrders(random.nextInt(300) + 650, ETicketOrder.HANDELAAR);
             }
             ticket.setTicketOrder(ticketOrder);
+            Date date = dag.getDatum();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.set(Calendar.HOUR_OF_DAY, 11);
+            if(cal.get(Calendar.YEAR)== 2014){
+                for(int index = 0; index < 5; index++){
+                    for(Zone zone: zones){
+                        Tracking trackingIn = new Tracking();
+                        trackingIn.setInOut(0);
+                        trackingIn.setTrackingNummer(trackingNummer);
+                        cal.add(Calendar.MINUTE, 20);
+                        trackingIn.setTimestamp(cal.getTime());
+                        trackingIn.setZone(zone);
+                        session.saveOrUpdate(trackingIn);
+
+                        Tracking trackingOut = new Tracking();
+                        trackingOut.setInOut(1);
+                        cal.add(Calendar.MINUTE, 20);
+                        trackingOut.setTrackingNummer(trackingNummer);
+                        trackingOut.setTimestamp(cal.getTime());
+                        trackingOut.setZone(zone);
+                        session.saveOrUpdate(trackingOut);
+                    }
+                }
+            }
+            session.saveOrUpdate(ticket);
 
         }
     }
@@ -261,6 +315,7 @@ public class TestData {
         TicketOrder ticketOrder = new TicketOrder();
         ticketOrder.setKoper(koper);
         ticketOrder.setVerkoopsWijze(verkoopWijze);
+        session.saveOrUpdate(ticketOrder);
         return ticketOrder;
     }
 }

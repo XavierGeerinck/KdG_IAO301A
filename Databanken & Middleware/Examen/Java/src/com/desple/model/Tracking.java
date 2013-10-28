@@ -24,6 +24,9 @@ public class Tracking {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="trackingNummer")
+    private int trackingNummer;
+
     @Column(name="timestamp")
     private Date timestamp;
 
@@ -64,5 +67,13 @@ public class Tracking {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    public int getTrackingNummer() {
+        return trackingNummer;
+    }
+
+    public void setTrackingNummer(int trackingNummer) {
+        this.trackingNummer = trackingNummer;
     }
 }

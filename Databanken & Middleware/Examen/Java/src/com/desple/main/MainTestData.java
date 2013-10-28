@@ -14,7 +14,7 @@ public class MainTestData {
     public static void main(String[] args) {
 
 
-        TestData test = new TestData("../Java/testData/festival.csv");
+        TestData test = new TestData("../Java/testData/");
 
     }
 
