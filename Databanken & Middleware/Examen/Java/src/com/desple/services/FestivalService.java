@@ -28,20 +28,27 @@ public class FestivalService {
         // Create a query
         // Problem here, need to be denormalized in the db since else this query will degrade performance by a factor of x3
         // IDea is to give artist an Optreden, this will be: Artiest can have multiple optredens but optreden has 1 artiest
-        //Query query = session.createQuery("from Optreden where = :artiest");
+        Query query = session.createQuery(
+                "from Festival as f where f in (" +
+                    "select fd.festival from FestivalDag as fd where fd in (" +
+                        "select o.festivalDag " +
+                        "from Optreden as o " +
+                        "where o.artiest = :artiest and o.startDate >= :dateStart and o.eindDate <= :dateEnd" +
+                    ")" +
+                ")"
+        );
 
         // Bind parameters
-        //query.setParameter("date", date);
-        //query.setParameter("zone", zone);
+        query.setParameter("dateStart", dateStart);
+        query.setParameter("dateEnd", dateEnd);
+        query.setParameter("artiest", artiest);
 
         // Get result
-        //List<Optreden> results = query.list();
-
-        //return results;
+        List<Festival> results = query.list();
 
         session.close();
 
-        return null;
+        return results;
     }
 
     public synchronized static List<Festival> getFestivals() {

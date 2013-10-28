@@ -44,6 +44,11 @@ public class Optreden {
     @JoinColumn(name="apparatuur_id")
     private BenodigdeApparatuur benodigdeApparatuur;
 
+    @ManyToOne
+    @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+    @JoinColumn(name="artiest_id")
+    private Artiest artiest;
+
     public Optreden() {
     }
 
@@ -105,6 +110,14 @@ public class Optreden {
 
     public void setBenodigdeApparatuur(BenodigdeApparatuur benodigdeApparatuur) {
         this.benodigdeApparatuur = benodigdeApparatuur;
+    }
+
+    public Artiest getArtiest() {
+        return artiest;
+    }
+
+    public void setArtiest(Artiest artiest) {
+        this.artiest = artiest;
     }
 
     @Override
