@@ -7,13 +7,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="festival_dag")
 public class FestivalDag {
@@ -27,7 +20,7 @@ public class FestivalDag {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalId")
+    @JoinColumn(name="festival_id")
     private Festival festival;
 
     public FestivalDag() {

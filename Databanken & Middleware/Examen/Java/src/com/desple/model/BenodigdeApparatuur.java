@@ -7,13 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="benodigde_apparatuur")
 public class BenodigdeApparatuur {

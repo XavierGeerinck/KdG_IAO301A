@@ -24,20 +24,20 @@ public class TicketType {
     @Column(name="prijs")
     private double prijs;
 
-    @Column(name= "ticketType", columnDefinition = "enum('NORMAL', 'VIP', 'COMBI', 'PERS' )")
+    @Column(name= "ticket_type")
     @Enumerated(EnumType.STRING)
-    private TicketTypes type;
+    private ETicketType type;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalId")
+    @JoinColumn(name="festival_id")
     private Festival festival;
 
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="ticketType_zone",
-            joinColumns = {@JoinColumn(name="ticketTypeId") },
-            inverseJoinColumns = {@JoinColumn(name="zoneId") })
+    @JoinTable(name="ticket_type_zone",
+            joinColumns = {@JoinColumn(name="ticket_type_id") },
+            inverseJoinColumns = {@JoinColumn(name="zone_id") })
     private Set<Zone> zones = new HashSet<Zone>();
 
     public TicketType() {
@@ -55,11 +55,11 @@ public class TicketType {
         this.prijs = prijs;
     }
 
-    public TicketTypes getType() {
+    public ETicketType getType() {
         return type;
     }
 
-    public void setType(TicketTypes type) {
+    public void setType(ETicketType type) {
         this.type = type;
     }
 

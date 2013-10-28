@@ -6,13 +6,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="pers_contract")
 public class PersContract {
@@ -32,12 +25,12 @@ public class PersContract {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="optredenId")
+    @JoinColumn(name="optreden_id")
     private Optreden optredenId;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="koperId")
+    @JoinColumn(name="koper_id")
     private Koper koperId;
 
     public PersContract() {

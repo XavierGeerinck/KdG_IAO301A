@@ -3,7 +3,6 @@ package com.desple.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -21,17 +20,17 @@ public class Zone {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "zoneType", columnDefinition = "enum('PODIUM1', 'PODIUM2', 'PUBLIEKPODIUM1', 'PUBLIEKPODIUM2', 'VIP', 'BACKSTAGE', 'SANITAIR', 'CAMPING')")
+    @Column(name = "zone_type")
     @Enumerated(EnumType.STRING)
-    private ZoneTypes zoneType;
+    private EZoneTypes zoneType;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalId")
+    @JoinColumn(name="festival_id")
     private Festival festival;
 
     @ManyToOne
-    @JoinColumn(name="bijhorendeZone")
+    @JoinColumn(name="bijhorende_zone")
     private Zone zone;
 
     @ManyToMany(mappedBy = "zones")
@@ -44,11 +43,11 @@ public class Zone {
         return id;
     }
 
-    public ZoneTypes getZoneType() {
+    public EZoneTypes getZoneType() {
         return zoneType;
     }
 
-    public void setZoneType(ZoneTypes zoneType) {
+    public void setZoneType(EZoneTypes zoneType) {
         zoneType = zoneType;
     }
 

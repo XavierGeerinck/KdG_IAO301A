@@ -6,13 +6,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="koper")
 public class Koper {
@@ -24,9 +17,9 @@ public class Koper {
     @Column(name="naam")
     private String naam;
 
-    @Column(name= "koperType", columnDefinition = "enum('PATICULIER', 'BEDRIJF', 'PERS' )")
+    @Column(name= "koper_type")
     @Enumerated(EnumType.STRING)
-    private KoperTypes type;
+    private EKoperType type;
 
     @OneToMany
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -53,11 +46,11 @@ public class Koper {
         this.naam = naam;
     }
 
-    public KoperTypes getType() {
+    public EKoperType getType() {
         return type;
     }
 
-    public void setType(KoperTypes type) {
+    public void setType(EKoperType type) {
         this.type = type;
     }
 

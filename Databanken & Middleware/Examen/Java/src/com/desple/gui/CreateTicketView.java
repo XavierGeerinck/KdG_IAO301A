@@ -5,7 +5,6 @@ import com.desple.services.*;
 import com.desple.util.SpringUtilities;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,13 +21,15 @@ public class CreateTicketView extends JFrame {
     private JLabel lblKoperNaam;
     private JTextField txtKoperNaam;
     private JLabel lblKoperType;
-    private JTextField txtKoperType;
+    private JComboBox<EKoperType> cmbKoperType;
     private JLabel lblFestivals;
     private JComboBox<Festival> cmbFestivals;
     private JLabel lblFestivalDagen;
     private JComboBox<FestivalDag> cmbFestivalDagen;
     private JLabel lblTicketTypes;
     private JComboBox<TicketType> cmbTicketTypes;
+    private JLabel lblTicketOrders;
+    private JComboBox<ETicketOrder> cmbTicketOrders;
     private JLabel lblAmountOfTickets;
     private JTextField txtAmountOfTickets;
 
@@ -51,8 +52,13 @@ public class CreateTicketView extends JFrame {
         lblKoperNaam.setLabelFor(txtKoperNaam);
 
         lblKoperType = new JLabel("KoperType: ", JLabel.TRAILING);
-        txtKoperType = new JTextField(10);
-        lblKoperType.setLabelFor(txtKoperType);
+        cmbKoperType = new JComboBox<EKoperType>();
+
+        for (EKoperType kt : EKoperType.values())  {
+            cmbKoperType.addItem(kt);
+        }
+
+        lblKoperType.setLabelFor(cmbTicketTypes);
 
         lblAmountOfTickets = new JLabel("Amount Of Tickets: ", JLabel.TRAILING);
         txtAmountOfTickets = new JTextField(10);
@@ -80,7 +86,7 @@ public class CreateTicketView extends JFrame {
         lblFestivalDagen.setLabelFor(cmbFestivalDagen);
 
         // Ticket Type
-        lblTicketTypes = new JLabel("Ticket Types", JLabel.TRAILING);
+        lblTicketTypes = new JLabel("Ticket Types: ", JLabel.TRAILING);
         cmbTicketTypes = new JComboBox<TicketType>();
 
         for (TicketType tp : TicketTypeService.getTicketTypes((Festival) cmbFestivals.getSelectedItem())) {
@@ -88,6 +94,16 @@ public class CreateTicketView extends JFrame {
         }
 
         lblTicketTypes.setLabelFor(cmbTicketTypes);
+
+        // Ticket Orders
+        lblTicketOrders = new JLabel("Order Type: ", JLabel.TRAILING);
+        cmbTicketOrders = new JComboBox<ETicketOrder>();
+
+        for (ETicketOrder to : ETicketOrder.values()) {
+            cmbTicketOrders.addItem(to);
+        }
+
+        lblTicketOrders.setLabelFor(cmbTicketOrders);
     }
 
     private void addComponents() {
@@ -103,13 +119,15 @@ public class CreateTicketView extends JFrame {
         p.add(lblKoperNaam);
         p.add(txtKoperNaam);
         p.add(lblKoperType);
-        p.add(txtKoperType);
+        p.add(cmbKoperType);
+        p.add(lblTicketOrders);
+        p.add(cmbTicketOrders);
         p.add(lblAmountOfTickets);
         p.add(txtAmountOfTickets);
 
         // Layout the panel
         // makeCompactGrid(panel, rows, cols, initX, initY, paddingX, paddingY
-        SpringUtilities.makeCompactGrid(p, 6, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(p, 7, 2, 5, 5, 5, 5);
 
         p.setOpaque(true);
 
@@ -132,7 +150,7 @@ public class CreateTicketView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Check if everything is set
-                if (txtKoperNaam.getText().equals("") || txtKoperType.getText().equals("")
+                if (txtKoperNaam.getText().equals("") || cmbKoperType.getSelectedItem() == null
                         || txtAmountOfTickets.getText().equals("")
                         || cmbTicketTypes.getSelectedItem() == null || cmbFestivalDagen.getSelectedItem() == null
                         || cmbFestivals.getSelectedItem() == null) {
@@ -141,11 +159,11 @@ public class CreateTicketView extends JFrame {
                     // Create a new ticket koper
                     Koper koper = new Koper();
                     koper.setNaam(txtKoperNaam.getText());
-                    koper.setType(txtKoperType.getText());
+                    koper.setType((EKoperType) cmbKoperType.getSelectedItem());
 
                     TicketOrder ticketOrder = new TicketOrder();
                     ticketOrder.setKoper(koper);
-                    ticketOrder.setVerkoopsWijze("Manual Added");
+                    ticketOrder.setVerkoopsWijze((ETicketOrder) cmbTicketOrders.getSelectedItem());
 
                     ArrayList<Ticket> tickets = new ArrayList();
 

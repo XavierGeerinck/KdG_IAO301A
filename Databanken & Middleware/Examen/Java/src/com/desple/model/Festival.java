@@ -5,13 +5,6 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="festival")
 public class Festival {

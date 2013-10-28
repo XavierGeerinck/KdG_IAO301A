@@ -46,11 +46,11 @@ public class TestData {
         for(int i = 0; i < kopers.size(); i++){
             Koper koper = kopers.get(i);
             if (i <  600){
-                koper.setType(KoperTypes.PARTICULIER);
+                koper.setType(EKoperType.PARTICULIER);
             }else if (i < 700){
-                koper.setType(KoperTypes.PERS);
+                koper.setType(EKoperType.PERS);
             }else{
-                koper.setType(KoperTypes.BEDRIJF);
+                koper.setType(EKoperType.BEDRIJF);
             }
             session.saveOrUpdate(koper);
         }
@@ -121,21 +121,21 @@ public class TestData {
     }
 
     private void generateZones(Festival festival, ArrayList<TicketType> ticketTypes) {
-        for(ZoneTypes zoneType : ZoneTypes.values()){
+        for(EZoneTypes zoneType : EZoneTypes.values()){
             Zone zone = new Zone();
             zone.setFestival(festival);
             zone.setZoneType(zoneType);
             for(TicketType ticketType : ticketTypes){
-                if(zoneType == ZoneTypes.VIP )  {
-                    if( TicketTypes.VIP == ticketType.getType() ){
+                if(zoneType == EZoneTypes.VIP )  {
+                    if( ETicketType.VIP == ticketType.getType() ){
                         zone.addTicketType(ticketType);
                     }
-                } else if(zoneType == ZoneTypes.BACKSTAGE){
-                    if( TicketTypes.PERS == ticketType.getType()){
+                } else if(zoneType == EZoneTypes.BACKSTAGE){
+                    if( ETicketType.PERS == ticketType.getType()){
                         zone.addTicketType(ticketType);
                     }
-                } else if(zoneType == ZoneTypes.CAMPING){
-                    if( TicketTypes.COMBI == ticketType.getType()){
+                } else if(zoneType == EZoneTypes.CAMPING){
+                    if( ETicketType.COMBI == ticketType.getType()){
                         zone.addTicketType(ticketType);
                     }
                 } else{
@@ -149,26 +149,26 @@ public class TestData {
     private ArrayList<TicketType> generateTicketTypes(int amountDays, Festival festival, int multiplier) {
         ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
         TicketType normalTicket = new TicketType();
-        normalTicket.setType(TicketTypes.NORMAL);
+        normalTicket.setType(ETicketType.NORMAL);
         normalTicket.setFestivalId(festival);
         normalTicket.setPrijs(50 + (multiplier*5));
         ticketTypes.add(normalTicket);
 
         TicketType vipTicket = new TicketType();
-        vipTicket.setType(TicketTypes.VIP);
+        vipTicket.setType(ETicketType.VIP);
         vipTicket.setFestivalId(festival);
         vipTicket.setPrijs((50 + (multiplier*5))* 2);
         ticketTypes.add(vipTicket);
 
         TicketType persTicket = new TicketType();
-        persTicket.setType(TicketTypes.PERS);
+        persTicket.setType(ETicketType.PERS);
         persTicket.setFestivalId(festival);
         persTicket.setPrijs(50 + (multiplier*5));
         ticketTypes.add(persTicket);
         //TicketType
         if (amountDays > 1){
             TicketType combiTicket = new TicketType();
-            combiTicket.setType(TicketTypes.COMBI);
+            combiTicket.setType(ETicketType.COMBI);
             combiTicket.setFestivalId(festival);
             combiTicket.setPrijs((50 + (multiplier*5))* (amountDays - 0.5) );
             ticketTypes.add(combiTicket);
@@ -247,16 +247,16 @@ public class TestData {
             }
             TicketOrder ticketOrder = null;
             if (i < ( 7500 * 0.6)){
-                ticketOrder = generateTicketOrders(random.nextInt(650), TicketOrders.WEB);
+                ticketOrder = generateTicketOrders(random.nextInt(650), ETicketOrder.WEB);
             }else{
-                ticketOrder = generateTicketOrders(random.nextInt(300) + 650, TicketOrders.HANDELAAR);
+                ticketOrder = generateTicketOrders(random.nextInt(300) + 650, ETicketOrder.HANDELAAR);
             }
             ticket.setTicketOrder(ticketOrder);
 
         }
     }
 
-    private TicketOrder generateTicketOrders(int index, TicketOrders verkoopWijze) {
+    private TicketOrder generateTicketOrders(int index, ETicketOrder verkoopWijze) {
         Koper koper = kopers.get(index);
         TicketOrder ticketOrder = new TicketOrder();
         ticketOrder.setKoper(koper);

@@ -1,0 +1,5 @@
+package com.desple.model;
+
+public enum EZoneTypes {
+    PODIUM1, PODIUM2, PUBLIEKPODIUM1, PUBLIEKPODIUM2, VIP, BACKSTAGE, SANITAIR, CAMPING
+}

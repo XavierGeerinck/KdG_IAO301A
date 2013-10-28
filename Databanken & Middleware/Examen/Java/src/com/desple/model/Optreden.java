@@ -7,13 +7,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="optreden")
 public class Optreden {
@@ -22,10 +15,10 @@ public class Optreden {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="startDate")
+    @Column(name="start_date")
     private Date startDate;
 
-    @Column(name="eindDate")
+    @Column(name="eind_date")
     private Date eindDate;
 
     @Column(name="soundcheck")
@@ -33,22 +26,22 @@ public class Optreden {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festDagId")
+    @JoinColumn(name="fest_dag_id")
     private FestivalDag festivalDag;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="playlistId")
+    @JoinColumn(name="playlist_id")
     private Playlist playlist;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="zoneId")
+    @JoinColumn(name="zone_id")
     private Zone zone;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="apparatuurId")
+    @JoinColumn(name="apparatuur_id")
     private BenodigdeApparatuur benodigdeApparatuur;
 
     public Optreden() {

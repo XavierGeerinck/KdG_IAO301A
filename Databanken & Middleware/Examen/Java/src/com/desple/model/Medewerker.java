@@ -6,13 +6,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="medewerker")
 public class Medewerker {
@@ -31,9 +24,9 @@ public class Medewerker {
     private double uurloon;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="medewerkerTaak", joinColumns = {
-            @JoinColumn(name="medewerkerId") }, inverseJoinColumns = {
-            @JoinColumn(name="taakId") })
+    @JoinTable(name="medewerker_taak", joinColumns = {
+            @JoinColumn(name="medewerker_id") }, inverseJoinColumns = {
+            @JoinColumn(name="taak_id") })
     private Set<Taak> taken = new HashSet<Taak>();
 
     public Medewerker() {

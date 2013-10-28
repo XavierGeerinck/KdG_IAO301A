@@ -32,7 +32,7 @@ public class Tracking {
 
     @ManyToOne
     @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
-    @JoinColumn(name="zoneId")
+    @JoinColumn(name="zone_id")
     private Zone zone;
 
     public Tracking() {

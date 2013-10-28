@@ -5,16 +5,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 17/09/13
- * Time: 12:05
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name="ticket_order")
 public class TicketOrder {
@@ -23,13 +14,13 @@ public class TicketOrder {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name= "verkoopWijze", columnDefinition = "enum('WEB', 'HANDELAAR')")
+    @Column(name= "verkoop_wijze")
     @Enumerated(EnumType.STRING)
-    private TicketOrders verkoopsWijze;
+    private ETicketOrder verkoopsWijze;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="koperId")
+    @JoinColumn(name="koper_id")
     private Koper koper;
 
     public TicketOrder() {
@@ -39,11 +30,11 @@ public class TicketOrder {
         return id;
     }
 
-    public TicketOrders getVerkoopsWijze() {
+    public ETicketOrder getVerkoopsWijze() {
         return verkoopsWijze;
     }
 
-    public void setVerkoopsWijze(TicketOrders verkoopsWijze) {
+    public void setVerkoopsWijze(ETicketOrder verkoopsWijze) {
         this.verkoopsWijze = verkoopsWijze;
     }
 

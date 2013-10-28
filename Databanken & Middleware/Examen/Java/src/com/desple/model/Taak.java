@@ -26,7 +26,7 @@ public class Taak {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="festivalDagId")
+    @JoinColumn(name="festival_dag_id")
     private FestivalDag festivalDag;
 
     public Taak() {
