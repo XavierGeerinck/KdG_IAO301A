@@ -38,7 +38,7 @@ public class MainView extends JFrame {
 
     private void addComponents() {
         JPanel pMain = new JPanel();
-        pMain.setLayout(new BoxLayout(pMain, BoxLayout.PAGE_AXIS));
+        pMain.setLayout(new GridLayout(0, 2));
 
         // Add the spring layour and the button
         pMain.setOpaque(true);
