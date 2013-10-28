@@ -35,4 +35,36 @@ public class PersContract {
 
     public PersContract() {
     }
+
+    public boolean isMagFilmen() {
+        return magFilmen;
+    }
+
+    public void setMagFilmen(boolean magFilmen) {
+        this.magFilmen = magFilmen;
+    }
+
+    public boolean isMagFoto() {
+        return magFoto;
+    }
+
+    public void setMagFoto(boolean magFoto) {
+        this.magFoto = magFoto;
+    }
+
+    public Optreden getOptredenId() {
+        return optredenId;
+    }
+
+    public void setOptredenId(Optreden optredenId) {
+        this.optredenId = optredenId;
+    }
+
+    public Koper getKoperId() {
+        return koperId;
+    }
+
+    public void setKoperId(Koper koperId) {
+        this.koperId = koperId;
+    }
 }
