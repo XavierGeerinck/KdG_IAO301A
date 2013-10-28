@@ -4,6 +4,8 @@ import com.desple.model.*;
 import com.desple.services.*;
 import com.desple.util.SpringUtilities;
 import net.sourceforge.jdatepicker.DateModel;
+import net.sourceforge.jdatepicker.JDateComponent;
+import net.sourceforge.jdatepicker.JDateComponentFactory;
 import net.sourceforge.jdatepicker.JDatePicker;
 
 import javax.swing.*;
@@ -22,6 +24,10 @@ public class SearchFestivalsView extends JFrame {
     private JButton btnSearch;
     private JLabel lblArtiesten;
     private JComboBox<Artiest> cmbArtiesten;
+    private JLabel lblDatePicker1;
+    private JDatePicker datePicker1;
+    private JLabel lblDatePicker2;
+    private JDatePicker datePicker2;
 
     public SearchFestivalsView() {
         setTitle("Search Optreden");
@@ -35,7 +41,7 @@ public class SearchFestivalsView extends JFrame {
     }
 
     private void initComponents() {
-        btnSearch = new JButton("Search Optreden");
+        btnSearch = new JButton("Search Festival");
 
         // Festival Dropdown
         lblArtiesten = new JLabel("Artiest: ", JLabel.TRAILING);
@@ -47,6 +53,23 @@ public class SearchFestivalsView extends JFrame {
         }
 
         lblArtiesten.setLabelFor(cmbArtiesten);
+
+        // Date picker 1
+        lblDatePicker1 = new JLabel("Date 1: ", JLabel.TRAILING);
+
+        datePicker1 = JDateComponentFactory.createJDatePicker();
+        datePicker1.setTextEditable(true);
+        datePicker1.setShowYearButtons(true);
+
+        lblDatePicker1.setLabelFor((JComponent) datePicker1);
+
+        // Date picker 2
+        lblDatePicker2 = new JLabel("Date 2: ", JLabel.TRAILING);
+        datePicker2 = JDateComponentFactory.createJDatePicker();
+        datePicker2.setTextEditable(true);
+        datePicker2.setShowYearButtons(true);
+
+        lblDatePicker2.setLabelFor((JComponent) datePicker2);
     }
 
     private void addComponents() {
@@ -55,10 +78,14 @@ public class SearchFestivalsView extends JFrame {
 
         p.add(lblArtiesten);
         p.add(cmbArtiesten);
+        p.add(lblDatePicker1);
+        p.add((JComponent) datePicker1);
+        p.add(lblDatePicker2);
+        p.add((JComponent) datePicker2);
 
         // Layout the panel
         // makeCompactGrid(panel, rows, cols, initX, initY, paddingX, paddingY
-        SpringUtilities.makeCompactGrid(p, 1, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(p, 3, 2, 5, 5, 5, 5);
 
         p.setOpaque(true);
 
@@ -86,95 +113,28 @@ public class SearchFestivalsView extends JFrame {
                 } else {
                     // Search Festivals
                     try {
-                        /*JDatePicker jdp = new JDatePicker() {
-                            @Override
-                            public void setTextEditable(boolean b) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public boolean isTextEditable() {
-                                return false;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void setButtonFocusable(boolean b) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public boolean getButtonFocusable() {
-                                return false;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void setShowYearButtons(boolean b) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public boolean isShowYearButtons() {
-                                return false;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void setDoubleClickAction(boolean b) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public boolean isDoubleClickAction() {
-                                return false;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public DateModel<?> getModel() {
-                                return null;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void addActionListener(ActionListener actionListener) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void removeActionListener(ActionListener actionListener) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public Properties getI18nStrings() {
-                                return null;  //To change body of implemented methods use File | Settings | File Templates.
-                            }
-
-                            @Override
-                            public void setI18nStrings(Properties properties) {
-                                //To change body of implemented methods use File | Settings | File Templates.
-                            }
-                        }  */
                         // Dates
-                        Date date1 = new Date();
-                        Date date2 = new Date();
-
-                        // TEST
-                        GregorianCalendar calendar = new GregorianCalendar();
-                        calendar.setTime(new Date());
-                        calendar.add(Calendar.DATE, 10); // Add 10 days
-                        date2.setTime(calendar.getTime().getTime());
+                        GregorianCalendar calendar1 = (GregorianCalendar) datePicker1.getModel().getValue();
+                        GregorianCalendar calendar2 = (GregorianCalendar) datePicker2.getModel().getValue();
 
                         // Get optredens that are happening now.
-                        List<Festival> festivals = FestivalService.findFestivalByArtistAndDate((Artiest) cmbArtiesten.getSelectedItem(), date1, date2);
+                        List<Festival> festivals = FestivalService.findFestivalByArtistAndDate((Artiest) cmbArtiesten.getSelectedItem(), calendar1.getTime(), calendar2.getTime());
 
                         StringBuilder sb = new StringBuilder();
 
                         sb.append("Found Festivals: ");
 
-                        for (Festival f : festivals) {
-                            sb.append(f.getNaam());
+                        if (festivals.isEmpty()) {
+                            sb.append("none");
+                        } else {
+                            for (Festival f : festivals) {
+                                sb.append(f.getNaam());
+                            }
                         }
 
                         JOptionPane.showMessageDialog(getContentPane(), sb.toString(), "Success", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                         JOptionPane.showMessageDialog(getContentPane(), ex.getMessage(), "Invalid Details", JOptionPane.ERROR_MESSAGE);
                     }
                 }

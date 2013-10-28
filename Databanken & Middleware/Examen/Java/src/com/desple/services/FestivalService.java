@@ -28,7 +28,7 @@ public class FestivalService {
         // Create a query
         // Problem here, need to be denormalized in the db since else this query will degrade performance by a factor of x3
         // IDea is to give artist an Optreden, this will be: Artiest can have multiple optredens but optreden has 1 artiest
-        //Query query = session.createQuery("from Optreden where  = :artiest");
+        //Query query = session.createQuery("from Optreden where = :artiest");
 
         // Bind parameters
         //query.setParameter("date", date);
