@@ -7,6 +7,7 @@ import com.desple.util.SpringUtilities;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class SearchOptredenView extends JFrame {
     private JComboBox<FestivalDag> cmbFestivalDagen;
     private JLabel lblZones;
     private JComboBox<Zone> cmbZones;
+    private JLabel lblTimePicker;
+    private JSpinner spinTimePicker;
 
     public SearchOptredenView() {
         setTitle("Search Optreden");
@@ -70,6 +73,13 @@ public class SearchOptredenView extends JFrame {
         }
 
         lblZones.setLabelFor(cmbZones);
+
+        // Time Picker
+        lblTimePicker = new JLabel("Time: ", JLabel.TRAILING);
+        spinTimePicker = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinTimePicker, "HH:mm:ss");
+        spinTimePicker.setEditor(timeEditor);
+        spinTimePicker.setValue(new Date());
     }
 
     private void addComponents() {
@@ -82,10 +92,12 @@ public class SearchOptredenView extends JFrame {
         p.add(cmbFestivalDagen);
         p.add(lblZones);
         p.add(cmbZones);
+        p.add(lblTimePicker);
+        p.add(spinTimePicker);
 
         // Layout the panel
         // makeCompactGrid(panel, rows, cols, initX, initY, paddingX, paddingY
-        SpringUtilities.makeCompactGrid(p, 3, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(p, 4, 2, 5, 5, 5, 5);
 
         p.setOpaque(true);
 
@@ -113,15 +125,34 @@ public class SearchOptredenView extends JFrame {
                 } else {
                     // Search Optreden
                     try {
+                        // Get the selected festivalDag, we need this to get the date
+                        Date festivalDagDate = ((FestivalDag) cmbFestivalDagen.getSelectedItem()).getDatum();
+                        Calendar calFestivalDag = Calendar.getInstance();
+                        calFestivalDag.setTime(festivalDagDate);
+
                         // Get optredens that are happening now.
-                        List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(new Date(), (Zone) cmbZones.getSelectedItem());
+                        Date timePicked = (Date) spinTimePicker.getValue();
+
+                        // Change the day, month and year of the spinner to the one of the selected festival day
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(timePicked);
+                        cal.set(Calendar.DAY_OF_MONTH, calFestivalDag.get(Calendar.DAY_OF_MONTH));
+                        cal.set(Calendar.MONTH, calFestivalDag.get(Calendar.MONTH));
+                        cal.set(Calendar.YEAR, calFestivalDag.get(Calendar.YEAR));
+
+                        // Search
+                        List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(cal.getTime(), (Zone) cmbZones.getSelectedItem());
 
                         StringBuilder sb = new StringBuilder();
 
                         sb.append("Happening now: ");
 
-                        for (Optreden op : optredens) {
-                            sb.append(op.getPlaylist().getNaam());
+                        if (optredens.isEmpty()) {
+                            sb.append("none");
+                        } else {
+                            for (Optreden op : optredens) {
+                                sb.append(op.getPlaylist().getNaam());
+                            }
                         }
 
                         JOptionPane.showMessageDialog(getContentPane(), sb.toString(), "Success", JOptionPane.INFORMATION_MESSAGE);
