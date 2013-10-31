@@ -75,6 +75,10 @@ public class Zone {
 
     @Override
     public String toString() {
-        return type.name();
+        return "Zone{" +
+                "type=" + type +
+                ", festival=" + festival +
+                ", ticketTypes=" + ticketTypes +
+                '}';
     }
 }

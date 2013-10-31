@@ -70,4 +70,11 @@ public class Ticket {
     public void setTicketOrder(TicketOrder ticketOrder) {
         this.ticketOrder = ticketOrder;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "barcode='" + barcode + '\'' +
+                '}';
+    }
 }

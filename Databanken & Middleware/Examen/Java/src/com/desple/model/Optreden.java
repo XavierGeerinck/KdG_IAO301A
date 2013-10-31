@@ -31,12 +31,12 @@ public class Optreden {
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="playlist_id", nullable = false)
+    @JoinColumn(name="playlist_id")
     private Playlist playlist;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name="zone_id", nullable = false)
+    @JoinColumn(name="zone_id")
     private Zone zone;
 
     @ManyToOne

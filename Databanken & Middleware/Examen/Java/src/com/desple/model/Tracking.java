@@ -30,6 +30,7 @@ public class Tracking {
     @Column(name="timestamp")
     private Date timestamp;
 
+    //0 for in 1 for out
     @Column(name="in_out")
     private int inOut;
 
@@ -75,5 +76,15 @@ public class Tracking {
 
     public void setTrackingNummer(int trackingNummer) {
         this.trackingNummer = trackingNummer;
+    }
+
+    @Override
+    public String toString() {
+        return "Tracking{" +
+                "trackingNummer=" + trackingNummer +
+                ", timestamp=" + timestamp +
+                ", inOut=" + inOut +
+                ", zone=" + zone +
+                '}';
     }
 }

@@ -29,9 +29,10 @@ public class TestData {
     private ArrayList<Festival> festivals;
     private ArrayList<Koper> kopers;
     private ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
-    private ArrayList<Zone> zones = new ArrayList<Zone>();
+    private ArrayList<Zone> zones;
     private int trackingNummer = 0;
     private int persCounter = 0;
+    private Transaction tx;
 
     public TestData(String url) {
         String csvFile1 = url + "festival.csv";
@@ -40,7 +41,7 @@ public class TestData {
         kopers = new ArrayList<Koper>();
         random = new Random();
         session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = session.beginTransaction();
+        tx = session.beginTransaction();
         readCsv(csvFile1, 0);
         readCsv(csvFile2, 1);
         run();
@@ -63,11 +64,12 @@ public class TestData {
         for(int counter = 0; counter < festivals.size() ; counter++){
             Festival festival = festivals.get(counter);
             session.saveOrUpdate(festival);
-            int amountDays = random.nextInt(4);
+            int amountDays = random.nextInt(3) + 1;
             Calendar cal = Calendar.getInstance();
             cal.setTime(festival.getStartDate());
             cal.add(Calendar.DATE, amountDays);
             festival.setEindDate(cal.getTime());
+            zones = new ArrayList<Zone>();
             generateTicketTypes(amountDays, festival, counter);
             generateZones(festival);
 
@@ -195,6 +197,7 @@ public class TestData {
         cal.add(Calendar.DATE, day);
         dag.setDatum(cal.getTime());
         dag.setFestival(festival);
+        System.out.println("Begin toevoegen Festival dag: " + dag.toString() + " van Festival: " + festival.toString() );
         int aantalOptredens = random.nextInt(3)+6;
         Calendar endPrevious = Calendar.getInstance();
         endPrevious.setTime(cal.getTime());
@@ -204,10 +207,14 @@ public class TestData {
         endPrevious.set(Calendar.MILLISECOND, 0);
 
         generateTicketsAndTracking(dag, ticketTypes);
+        System.out.println("Tickets en tracking voor " + dag.toString() + " toegevoegd");
         for(int i = 0; i < aantalOptredens; i++){
             endPrevious = generateOptredens(endPrevious, i, dag);
         }
         session.saveOrUpdate(dag);
+        tx.commit();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        tx = session.beginTransaction();
 
 
     }
@@ -251,7 +258,7 @@ public class TestData {
     }
 
     private void generateTicketsAndTracking(FestivalDag dag, ArrayList<TicketType> ticketTypes){
-
+        int counter = 0;
         for(int i = 0; i<7500; i++){
             trackingNummer++;
 
@@ -302,12 +309,14 @@ public class TestData {
                         trackingOut.setTimestamp(cal.getTime());
                         trackingOut.setZone(zone);
                         session.saveOrUpdate(trackingOut);
+                        counter++;
                     }
                 }
             }
             session.saveOrUpdate(ticket);
 
         }
+        System.out.println(counter);
     }
 
     private TicketOrder generateTicketOrders(int index, ETicketOrder verkoopWijze) {
