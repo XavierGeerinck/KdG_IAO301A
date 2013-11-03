@@ -1,0 +1,41 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="festival">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="locatie"/>
+                <xs:element type="xs:string" name="start"/>
+                <xs:element type="xs:string" name="end"/>
+                <xs:element name="dag" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="artiesten">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="artiest" maxOccurs="unbounded"
+                                            minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element type="xs:string" name="naam"/>
+                                                  <xs:element type="xs:string"
+                                                  name="tijd_beschikbaar"/>
+                                                  <xs:element type="xs:string" name="start"/>
+                                                  <xs:element type="xs:string" name="end"/>
+                                                  <xs:element type="xs:string" name="zone"/>
+                                                  <xs:element type="xs:string" name="mag_filmen"/>
+                                                  <xs:element type="xs:string" name="mag_foto"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="id" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="naam"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
