@@ -60,46 +60,30 @@ public class Sender {
             List<Zone> zones = ZoneService.getZonesByFestival(festivals.get(0));
             int i = 0;
             while(i < 500){
-                RFIDModel trackingIn = new RFIDModel();
-                RFIDModel trackingOut = new RFIDModel();
+                RFIDModel tracking = new RFIDModel();
 
                 Random random = new Random();
                 int randomZone = random.nextInt((zones.size()- 2)) + 2;
                 Zone zone = zones.get(randomZone);
-
-
-
-
-                trackingIn.setZoneId(zone.getId());
-                trackingIn.setTrackingNummer(i);
-                trackingIn.setInOut(0);
-
-                trackingOut.setZoneId(zone.getId());
-                trackingOut.setTrackingNummer(i);
-                trackingOut.setInOut(1);
+                tracking.setZoneId(zone.getId());
+                tracking.setTrackingNummer(i);
 
 
                 Date date1 = sender.generateRandomDate(date);
                 Date date2 = sender.generateRandomDate(date);
 
                 if(date1.compareTo(date2) > 0 ){
-                    trackingIn.setTimeStamp(date2);
-                    trackingOut.setTimeStamp(date1);
+                    tracking.setTimeStampIn(date2);
+                    tracking.setTimeStampOut(date1);
                 }else{
-                    trackingIn.setTimeStamp(date1);
-                    trackingOut.setTimeStamp(date2);
+                    tracking.setTimeStampIn(date1);
+                    tracking.setTimeStampOut(date2);
                 }
 
 
                 StringWriter writer = new StringWriter();
-                Marshaller.marshal(trackingIn, writer);
+                Marshaller.marshal(tracking, writer);
                 TextMessage message = session.createTextMessage(writer.toString());
-                producer.send(message);
-
-
-                StringWriter writer2 = new StringWriter();
-                Marshaller.marshal(trackingOut, writer2);
-                message = session.createTextMessage(writer2.toString());
                 producer.send(message);
                 i++;
             }

@@ -279,21 +279,15 @@ public class TestData {
             if(cal.get(Calendar.YEAR)== 2014){
                 for(int j = 0; j < 5; j++){
                     for(Zone zone: zones){
-                        Tracking trackingIn = new Tracking();
-                        trackingIn.setInOut(0);
-                        trackingIn.setTrackingNummer(trackingNummer);
-                        cal.add(Calendar.MINUTE, 20);
-                        trackingIn.setTimestamp(cal.getTime());
-                        trackingIn.setZone(zone);
-                        session.saveOrUpdate(trackingIn);
 
-                        Tracking trackingOut = new Tracking();
-                        trackingOut.setInOut(1);
+                        Tracking tracking = new Tracking();
+                        tracking.setTrackingNummer(trackingNummer);
+                        tracking.setZone(zone);
                         cal.add(Calendar.MINUTE, 20);
-                        trackingOut.setTrackingNummer(trackingNummer);
-                        trackingOut.setTimestamp(cal.getTime());
-                        trackingOut.setZone(zone);
-                        session.saveOrUpdate(trackingOut);
+                        tracking.setTimestampIn(cal.getTime());
+                        cal.add(Calendar.MINUTE, 20);
+                        tracking.setTimestampOut(cal.getTime());
+                        session.saveOrUpdate(tracking);
                     }
                 }
             }

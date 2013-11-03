@@ -64,8 +64,8 @@ public class Reciever {
 
                         RFIDModel rfidModel = (RFIDModel)(Unmarshaller.unmarshal(RFIDModel.class, reader));
                         Tracking tracking = new Tracking();
-                        tracking.setInOut(rfidModel.getInOut());
-                        tracking.setTimestamp(rfidModel.getTimeStamp());
+                        tracking.setTimestampIn(rfidModel.getTimeStampIn());
+                        tracking.setTimestampOut(rfidModel.getTimeStampOut());
                         tracking.setTrackingNummer(rfidModel.getTrackingNummer());
                         tracking.setZone(ZoneService.getZoneById(rfidModel.getZoneId()));
 
@@ -73,11 +73,11 @@ public class Reciever {
                         sessionHibernate.saveOrUpdate(tracking);
                         tx.commit();
                         BasicDBObject dbObject = new BasicDBObject("TrackingNummer", tracking.getTrackingNummer()).
-                                append("Timestamp", tracking.getTimestamp()).
-                                append("In/Out", tracking.getInOut()).
+                                append("TimestampIn", tracking.getTimestampIn()).
+                                append("TimestampOut", tracking.getTimestampOut()).
                                 append("Zone", tracking.getZone().getType().toString());
                         if (tracking.getZone().getZone() != null){
-                            List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(tracking.getTimestamp(), tracking.getZone().getZone());
+                            //List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(tracking.getTimestamp(), tracking.getZone().getZone());
 
                             if (optredens.isEmpty() == false){
                                 dbObject.append("Artiest", optredens.get(0).getArtiest().getNaam());

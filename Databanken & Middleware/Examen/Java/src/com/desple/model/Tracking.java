@@ -27,12 +27,11 @@ public class Tracking {
     @Column(name="trackingNummer")
     private int trackingNummer;
 
-    @Column(name="timestamp")
-    private Date timestamp;
+    @Column(name="timestampIn")
+    private Date timestampIn;
 
-    //0 for in 1 for out
-    @Column(name="in_out")
-    private int inOut;
+    @Column(name="timestampOut")
+    private Date timestampOut;
 
     @ManyToOne
     @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
@@ -50,20 +49,20 @@ public class Tracking {
         this.id = id;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getTimestampIn() {
+        return timestampIn;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setTimestampIn(Date timestampIn) {
+        this.timestampIn = timestampIn;
     }
 
-    public int getInOut() {
-        return inOut;
+    public Date getTimestampOut() {
+        return timestampOut;
     }
 
-    public void setInOut(int inOut) {
-        this.inOut = inOut;
+    public void setTimestampOut(Date timestampOut) {
+        this.timestampOut = timestampOut;
     }
 
     public Zone getZone() {
@@ -84,10 +83,11 @@ public class Tracking {
 
     @Override
     public String toString() {
-        return "Tracking{" + id +
-                "trackingNummer=" + trackingNummer +
-                ", timestamp=" + timestamp +
-                ", inOut=" + inOut +
+        return "Tracking{" +
+                "id=" + id +
+                ", trackingNummer=" + trackingNummer +
+                ", timestampIn=" + timestampIn +
+                ", timestampOut=" + timestampOut +
                 ", zone=" + zone +
                 '}';
     }

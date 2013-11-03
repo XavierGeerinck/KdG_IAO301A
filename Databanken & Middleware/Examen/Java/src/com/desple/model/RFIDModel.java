@@ -12,8 +12,8 @@ import java.util.Date;
 public class RFIDModel {
 
     private int trackingNummer;
-    private Date timeStamp;
-    private int inOut;
+    private Date timeStampIn;
+    private Date timeStampOut;
     private Integer zoneId;
 
     public int getTrackingNummer() {
@@ -24,20 +24,20 @@ public class RFIDModel {
         this.trackingNummer = trackingNummer;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public Date getTimeStampIn() {
+        return timeStampIn;
     }
 
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimeStampIn(Date timeStampIn) {
+        this.timeStampIn = timeStampIn;
     }
 
-    public int getInOut() {
-        return inOut;
+    public Date getTimeStampOut() {
+        return timeStampOut;
     }
 
-    public void setInOut(int inOut) {
-        this.inOut = inOut;
+    public void setTimeStampOut(Date timeStampOut) {
+        this.timeStampOut = timeStampOut;
     }
 
     public Integer getZoneId() {
