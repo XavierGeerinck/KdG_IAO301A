@@ -33,10 +33,7 @@ public class TicketType {
     @JoinColumn(name="festival_id")
     private Festival festival;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="ticket_type_zone",
-            joinColumns = {@JoinColumn(name="ticket_type_id") },
-            inverseJoinColumns = {@JoinColumn(name="zone_id") })
+    @ManyToMany(mappedBy = "ticketTypes")
     private Set<Zone> zones = new HashSet<Zone>();
 
     public TicketType() {

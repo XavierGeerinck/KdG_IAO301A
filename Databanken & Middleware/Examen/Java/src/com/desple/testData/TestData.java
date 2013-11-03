@@ -126,10 +126,12 @@ public class TestData {
 
     private void generateTicketTypes(int amountDays, Festival festival, int multiplier) {
         TicketType normalTicket = new TicketType();
+
         normalTicket.setType(ETicketType.NORMAL);
         normalTicket.setFestivalId(festival);
         normalTicket.setPrijs(50 + (multiplier*5));
         ticketTypes.add(normalTicket);
+
         session.saveOrUpdate(normalTicket);
 
         TicketType vipTicket = new TicketType();

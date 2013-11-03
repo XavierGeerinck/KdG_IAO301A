@@ -29,7 +29,10 @@ public class Zone {
     @OneToMany(mappedBy = "zone")
     private Set<Tracking> trackings = new HashSet<Tracking>();
 
-    @ManyToMany(mappedBy = "zones")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="ticket_type_zone",
+            joinColumns = {@JoinColumn(name="zone_id") },
+            inverseJoinColumns = {@JoinColumn(name="ticket_type_id") })
     private Set<TicketType> ticketTypes = new HashSet<TicketType>();
 
     public Zone() {
