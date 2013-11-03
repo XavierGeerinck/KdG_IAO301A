@@ -26,7 +26,7 @@ public class OptredenService {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         // Create a query
-        Query query = session.createQuery("from Optreden o where o.startDate < :date and o.eindDate > :date and zone = :zone");
+        Query query = session.createQuery("from Optreden o where o.startDate < :date and o.eindDate > :date and o.zone = :zone");
 
         // Bind parameters
         query.setParameter("date", date);
@@ -40,4 +40,10 @@ public class OptredenService {
 
         return results;
     }
+
+
+
+
+
+
 }

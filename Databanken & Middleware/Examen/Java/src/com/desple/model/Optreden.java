@@ -13,7 +13,7 @@ public class Optreden {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="start_date")
     private Date startDate;

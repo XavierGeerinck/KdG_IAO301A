@@ -12,7 +12,7 @@ public class Playlist {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="grootte")
     private double grootte;

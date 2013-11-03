@@ -13,7 +13,7 @@ public class BenodigdeApparatuur {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="micro")
     private int micro;

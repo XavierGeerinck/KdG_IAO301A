@@ -13,7 +13,7 @@ public class FestivalDag {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="datum")
     private Date datum;

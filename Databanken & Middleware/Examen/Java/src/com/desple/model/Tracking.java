@@ -22,7 +22,7 @@ public class Tracking {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="trackingNummer")
     private int trackingNummer;
@@ -34,7 +34,7 @@ public class Tracking {
     @Column(name="in_out")
     private int inOut;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
     @JoinColumn(name="zone_id")
     private Zone zone;
@@ -44,6 +44,10 @@ public class Tracking {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public Date getTimestamp() {
@@ -80,7 +84,7 @@ public class Tracking {
 
     @Override
     public String toString() {
-        return "Tracking{" +
+        return "Tracking{" + id +
                 "trackingNummer=" + trackingNummer +
                 ", timestamp=" + timestamp +
                 ", inOut=" + inOut +

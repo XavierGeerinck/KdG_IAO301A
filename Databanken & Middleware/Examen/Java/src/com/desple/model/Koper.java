@@ -12,7 +12,7 @@ public class Koper {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="naam")
     private String naam;

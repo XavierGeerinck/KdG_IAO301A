@@ -12,22 +12,24 @@ public class Zone {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "zone_type")
     @Enumerated(EnumType.STRING)
     private EZoneType type;
 
-    @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="festival_id")
     private Festival festival;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bijhorende_zone")
     private Zone zone;
 
-    @ManyToMany(mappedBy = "zones")
+    @OneToMany(mappedBy = "zone", fetch = FetchType.EAGER)
+    private Set<Tracking> trackings = new HashSet<Tracking>();
+
+    @ManyToMany(mappedBy = "zones", fetch = FetchType.EAGER)
     private Set<TicketType> ticketTypes = new HashSet<TicketType>();
 
     public Zone() {
@@ -35,6 +37,10 @@ public class Zone {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public Zone getZone() {
@@ -75,10 +81,6 @@ public class Zone {
 
     @Override
     public String toString() {
-        return "Zone{" +
-                "type=" + type +
-                ", festival=" + festival +
-                ", ticketTypes=" + ticketTypes +
-                '}';
+        return id + "  " + type;
     }
 }

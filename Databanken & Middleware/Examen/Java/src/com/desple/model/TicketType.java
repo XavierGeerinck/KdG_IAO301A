@@ -19,7 +19,7 @@ public class TicketType {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="prijs")
     private double prijs;

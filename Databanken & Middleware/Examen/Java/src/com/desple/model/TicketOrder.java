@@ -12,7 +12,7 @@ public class TicketOrder {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name= "verkoop_wijze")
     @Enumerated(EnumType.STRING)

@@ -35,4 +35,27 @@ public class ZoneService {
 
         return results;
     }
+
+    public synchronized static Zone getZoneById(Integer zoneId){
+        if (zoneId == null){
+            throw new NullPointerException("ZoneId is not set");
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        // Create a query
+        Query query = session.createQuery("from Zone where id = :zoneId");
+
+        // Bind params
+        query.setParameter("zoneId", zoneId);
+
+        // Get result
+        Zone result = (Zone)query.uniqueResult();
+
+        // Close the session
+        session.close();
+
+        return result;
+
+    }
 }

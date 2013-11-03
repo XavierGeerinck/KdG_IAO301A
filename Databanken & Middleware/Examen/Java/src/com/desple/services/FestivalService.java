@@ -65,4 +65,25 @@ public class FestivalService {
 
         return results;
     }
+
+    public synchronized static List<Festival> findFestivalByName(String name) {
+        if(name == null){
+            throw new NullPointerException("Date or artiest can not be null.");
+        }
+        // Create session
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        // Create a query
+        Query query = session.createQuery("from Festival where naam = :name");
+        query.setParameter("name", name);
+
+        // Get result
+        List<Festival> results = query.list();
+
+        session.close();
+
+        return results;
+    }
+
+
 }

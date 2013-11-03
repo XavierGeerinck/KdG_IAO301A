@@ -12,7 +12,7 @@ public class PersContract {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="bio")
     private String bio;

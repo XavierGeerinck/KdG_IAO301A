@@ -7,6 +7,7 @@ import com.desple.util.SpringUtilities;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,7 @@ public class SearchOptredenView extends JFrame {
     private JComboBox<FestivalDag> cmbFestivalDagen;
     private JLabel lblZones;
     private JComboBox<Zone> cmbZones;
+    private ArrayList<Zone> zones = new ArrayList<Zone>();
     private JLabel lblTimePicker;
     private JSpinner spinTimePicker;
 
@@ -70,6 +72,7 @@ public class SearchOptredenView extends JFrame {
 
         for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
             cmbZones.addItem(z);
+            zones.add(z);
         }
 
         lblZones.setLabelFor(cmbZones);
@@ -140,8 +143,11 @@ public class SearchOptredenView extends JFrame {
                         cal.set(Calendar.MONTH, calFestivalDag.get(Calendar.MONTH));
                         cal.set(Calendar.YEAR, calFestivalDag.get(Calendar.YEAR));
 
+                        int index = cmbZones.getSelectedIndex();
                         // Search
-                        List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(cal.getTime(), (Zone) cmbZones.getSelectedItem());
+
+                        JOptionPane.showMessageDialog(getContentPane(), zones.get(index).getId(), "Success", JOptionPane.INFORMATION_MESSAGE);
+                        List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(cal.getTime(), zones.get(index));
 
                         StringBuilder sb = new StringBuilder();
 
@@ -150,13 +156,15 @@ public class SearchOptredenView extends JFrame {
                         if (optredens.isEmpty()) {
                             sb.append("none");
                         } else {
+
                             for (Optreden op : optredens) {
-                                sb.append(op.getPlaylist().getNaam());
+                                sb.append( op.getId() + " " + op.getArtiest().getNaam());
                             }
                         }
 
                         JOptionPane.showMessageDialog(getContentPane(), sb.toString(), "Success", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
+
                         JOptionPane.showMessageDialog(getContentPane(), ex.getMessage(), "Invalid Details", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -177,9 +185,11 @@ public class SearchOptredenView extends JFrame {
 
                 // Update ticket types
                 cmbZones.removeAllItems();
+                zones.clear();
 
                 for (Zone z : ZoneService.getZonesByFestival((Festival) cmbFestivals.getSelectedItem())) {
                     cmbZones.addItem(z);
+                    zones.add(z);
                 }
             }
         });

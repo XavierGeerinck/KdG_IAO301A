@@ -11,7 +11,7 @@ public class Festival {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name="naam")
     private String naam;
@@ -25,10 +25,10 @@ public class Festival {
     @Column(name="eind_date")
     private Date eindDate;
 
-    @OneToMany(mappedBy = "festival")
+    @OneToMany(mappedBy = "festival", fetch = FetchType.EAGER)
     private Set<Zone> zones = new HashSet<Zone>();
 
-    @OneToMany(mappedBy = "festival")
+    @OneToMany(mappedBy = "festival", fetch = FetchType.EAGER)
     private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
 
     public Festival() {
@@ -36,6 +36,10 @@ public class Festival {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNaam() {

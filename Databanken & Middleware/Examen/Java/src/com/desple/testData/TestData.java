@@ -30,20 +30,20 @@ public class TestData {
     private ArrayList<Koper> kopers;
     private ArrayList<TicketType> ticketTypes = new ArrayList<TicketType>();
     private ArrayList<Zone> zones;
+    private ArrayList<Artiest> artiests;
     private int trackingNummer = 0;
     private int persCounter = 0;
     private Transaction tx;
 
     public TestData(String url) {
-        String csvFile1 = url + "festival.csv";
-        String csvFile2 = url + "klanten.csv";
         festivals = new ArrayList<Festival>();
         kopers = new ArrayList<Koper>();
         random = new Random();
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         tx = session.beginTransaction();
-        readCsv(csvFile1, 0);
-        readCsv(csvFile2, 1);
+        festivals = Reader.readFestivals(url+ "festival.csv");
+        kopers = Reader.readKopers(url+"klanten.csv");
+        artiests = Reader.readArtiest(url + "artiesten.csv");
         run();
         tx.commit();
     }
@@ -79,54 +79,7 @@ public class TestData {
         }
     }
 
-    private void readCsv(String url, int index){
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ";";
-        int counter = 0;
-        Random random = new Random();
-        try {
 
-            br = new BufferedReader(new FileReader(url));
-            while ((line = br.readLine()) != null) {
-                if (counter == 0){
-                    counter++;
-                }else{
-                    if(index == 0){
-                        String[] festivalString = line.split(cvsSplitBy);
-                        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yy");
-
-                        Festival festival = new Festival();
-                        festival.setNaam(festivalString[0]);
-                        festival.setLocatie(festivalString[1]);
-                        festival.setStartDate(sdf.parse(festivalString[2]));
-                        festivals.add(festival);
-                    }else{
-                        String[] koperString = line.split(cvsSplitBy);
-                        Koper koper = new Koper();
-                        koper.setNaam(koperString[0]);
-                        kopers.add(koper);
-                    }
-                }
-
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     private void generateZones(Festival festival) {
 
@@ -152,7 +105,21 @@ public class TestData {
                 }
 
             }
+            if (zone.getType() == EZoneType.PUBLIEKPODIUM1){
+                for(Zone myZone: zones){
+                    if (myZone.getType() == EZoneType.PODIUM1){
+                        zone.setZone(myZone);
+                    }
+                }
+            }else if (zone.getType() == EZoneType.PUBLIEKPODIUM2){
+                for(Zone myZone: zones){
+                    if(myZone.getType()== EZoneType.PODIUM2){
+                        zone.setZone(myZone);
+                    }
+                }
+            }
             zones.add(zone);
+
             session.saveOrUpdate(zone);
         }
     }
@@ -205,7 +172,7 @@ public class TestData {
         endPrevious.set(Calendar.MINUTE, 0);
         endPrevious.set(Calendar.SECOND, 0);
         endPrevious.set(Calendar.MILLISECOND, 0);
-
+        generateArtiesten();
         generateTicketsAndTracking(dag, ticketTypes);
         System.out.println("Tickets en tracking voor " + dag.toString() + " toegevoegd");
         for(int i = 0; i < aantalOptredens; i++){
@@ -237,12 +204,27 @@ public class TestData {
         persContract.setMagFoto(random.nextBoolean());
         persContract.setMagFilmen(random.nextBoolean());
         persContract.setOptredenId(optreden);
+        optreden.setZone(zones.get(random.nextInt(2)));
+        optreden.setArtiest(artiests.get(random.nextInt(artiests.size())));
         session.saveOrUpdate(optreden);
 
 
         return cal;
 
 
+    }
+
+    private void generateArtiesten(){
+        for(Artiest artiest: artiests){
+            for(Zone zone: zones){
+                if(zone.getType() == EZoneType.BACKSTAGE)
+                {
+                    artiest.setZone(zone);
+                }
+            }
+            artiest.setBio(artiest.getNaam() + "'s Biography made by");
+            session.saveOrUpdate(artiest);
+        }
     }
 
     private BenodigdeApparatuur generateAperatuur(){
@@ -264,7 +246,11 @@ public class TestData {
 
             Ticket ticket = new Ticket();
             ticket.setFestivalDag(dag);
-            ticket.setBarcode("8711700735179");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dag.getDatum());
+            long barcode = cal.getTimeInMillis() + i;
+            System.out.println(barcode);
+            ticket.setBarcode(barcode + "" );
             if(i == 0){
                 ticket.setTicketType(ticketTypes.get(2));
             }else if (i == 1){
@@ -288,7 +274,7 @@ public class TestData {
             }
             ticket.setTicketOrder(ticketOrder);
             Date date = dag.getDatum();
-            Calendar cal = Calendar.getInstance();
+            cal = Calendar.getInstance();
             cal.setTime(date);
             cal.set(Calendar.HOUR_OF_DAY, 11);
             if(cal.get(Calendar.YEAR)== 2014){
