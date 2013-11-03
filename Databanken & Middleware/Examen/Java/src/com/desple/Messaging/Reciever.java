@@ -77,7 +77,7 @@ public class Reciever {
                                 append("TimestampOut", tracking.getTimestampOut()).
                                 append("Zone", tracking.getZone().getType().toString());
                         if (tracking.getZone().getZone() != null){
-                            //List<Optreden> optredens = OptredenService.findOptredenByDateAndZone(tracking.getTimestamp(), tracking.getZone().getZone());
+                            List<Optreden> optredens = OptredenService.findOptredenByDatesAndZone(tracking.getTimestampIn(), tracking.getTimestampOut(), tracking.getZone().getZone());
 
                             if (optredens.isEmpty() == false){
                                 dbObject.append("Artiest", optredens.get(0).getArtiest().getNaam());

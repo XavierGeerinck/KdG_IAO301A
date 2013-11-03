@@ -276,6 +276,7 @@ public class TestData {
             cal = Calendar.getInstance();
             cal.setTime(date);
             cal.set(Calendar.HOUR_OF_DAY, 11);
+            cal.set(Calendar.MINUTE, 5);
             if(cal.get(Calendar.YEAR)== 2014){
                 for(int j = 0; j < 5; j++){
                     for(Zone zone: zones){
