@@ -240,7 +240,6 @@ public class TestData {
     }
 
     private void generateTicketsAndTracking(FestivalDag dag, ArrayList<TicketType> ticketTypes){
-
         for(int i = 0; i<7500; i++){
             trackingNummer++;
 
