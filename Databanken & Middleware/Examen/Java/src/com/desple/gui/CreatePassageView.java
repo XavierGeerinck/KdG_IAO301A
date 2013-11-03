@@ -122,7 +122,7 @@ public class CreatePassageView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                dateIn = new Date();
+                dateOut = new Date();
                 createPassage();
             }
         });
@@ -132,7 +132,7 @@ public class CreatePassageView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                dateOut = new Date();
+                dateIn = new Date();
                 createPassage();
             }
         });
@@ -165,7 +165,7 @@ public class CreatePassageView extends JFrame {
                 || cmbFestivals.getSelectedItem() == null || cmbZones.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "Invalid Details", JOptionPane.ERROR_MESSAGE);
         } else if(dateIn == null && dateOut != null) {
-            JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "First create an In tracking then an out", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(getContentPane(), "First create an In tracking then an out", "Invalid details entered", JOptionPane.ERROR_MESSAGE);
         } else {
             // Create a new tracking
             Tracking tracking = new Tracking();
