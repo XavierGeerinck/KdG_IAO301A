@@ -17,17 +17,11 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TrackingService {
-    public synchronized static void savePassage(Zone zone, int inOut) {
+    public synchronized static void savePassage(Tracking tracking) {
         // Validation
-        if (zone == null) {
+        if (tracking == null) {
             throw new NullPointerException("Bezoeker or zone are null.");
         }
-
-        // Create a tracking based on the bezoeker, the zone and inOut
-        Tracking tracking = new Tracking();
-        tracking.setInOut(inOut);
-        tracking.setZone(zone);
-        tracking.setTimestamp(new Date());
 
         // Saving to the database
 

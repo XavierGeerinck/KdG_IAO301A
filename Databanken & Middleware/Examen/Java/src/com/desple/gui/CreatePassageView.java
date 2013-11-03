@@ -29,6 +29,9 @@ public class CreatePassageView extends JFrame {
     private JLabel lblRfidBand;
     private JTextField txtRfidBand;
 
+    private Date dateIn;
+    private Date dateOut;
+
     public CreatePassageView() {
         setTitle("Create Passage");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -119,7 +122,8 @@ public class CreatePassageView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                createPassage(1);
+                dateIn = new Date();
+                createPassage();
             }
         });
 
@@ -128,7 +132,8 @@ public class CreatePassageView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                createPassage(0);
+                dateOut = new Date();
+                createPassage();
             }
         });
 
@@ -154,23 +159,25 @@ public class CreatePassageView extends JFrame {
         });
     }
 
-    private void createPassage(int inOut) {
+    private void createPassage() {
         // Check if everything is set
         if (txtRfidBand.getText().equals("") ||  cmbFestivalDagen.getSelectedItem() == null
                 || cmbFestivals.getSelectedItem() == null || cmbZones.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "Invalid Details", JOptionPane.ERROR_MESSAGE);
+        } else if(dateIn == null && dateOut != null) {
+            JOptionPane.showMessageDialog(getContentPane(), "Invalid details entered", "First create an In tracking then an out", JOptionPane.ERROR_MESSAGE);
         } else {
             // Create a new tracking
             Tracking tracking = new Tracking();
             tracking.setZone((Zone) cmbZones.getSelectedItem());
-            tracking.setInOut(inOut);
-            tracking.setTimestamp(new Date());
+            tracking.setTimestampIn(dateIn);
+            tracking.setTimestampOut(dateOut);
 
             // Save Tracking
             try {
-                TrackingService.savePassage((Zone) cmbZones.getSelectedItem(), inOut);
+                TrackingService.savePassage(tracking);
 
-                JOptionPane.showMessageDialog(getContentPane(), "Created " + tracking.getInOut() + " for rfid: " + txtRfidBand.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(getContentPane(), "Created in:" + tracking.getTimestampIn() + " out: " + tracking.getTimestampOut() + "for rfid: " + txtRfidBand.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(getContentPane(), ex.getMessage(), "Invalid Details", JOptionPane.ERROR_MESSAGE);
             }
