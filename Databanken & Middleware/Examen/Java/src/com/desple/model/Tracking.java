@@ -34,7 +34,7 @@ public class Tracking {
     @Column(name="in_out")
     private int inOut;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
     @JoinColumn(name="zone_id")
     private Zone zone;

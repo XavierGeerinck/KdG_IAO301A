@@ -26,10 +26,10 @@ public class Zone {
     @JoinColumn(name="bijhorende_zone")
     private Zone zone;
 
-    @OneToMany(mappedBy = "zone", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "zone")
     private Set<Tracking> trackings = new HashSet<Tracking>();
 
-    @ManyToMany(mappedBy = "zones", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "zones")
     private Set<TicketType> ticketTypes = new HashSet<TicketType>();
 
     public Zone() {
