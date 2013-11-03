@@ -240,7 +240,6 @@ public class TestData {
     }
 
     private void generateTicketsAndTracking(FestivalDag dag, ArrayList<TicketType> ticketTypes){
-        int counter = 0;
         for(int i = 0; i<7500; i++){
             trackingNummer++;
 
@@ -249,7 +248,6 @@ public class TestData {
             Calendar cal = Calendar.getInstance();
             cal.setTime(dag.getDatum());
             long barcode = cal.getTimeInMillis() + i;
-            System.out.println(barcode);
             ticket.setBarcode(barcode + "" );
             if(i == 0){
                 ticket.setTicketType(ticketTypes.get(2));
@@ -295,14 +293,12 @@ public class TestData {
                         trackingOut.setTimestamp(cal.getTime());
                         trackingOut.setZone(zone);
                         session.saveOrUpdate(trackingOut);
-                        counter++;
                     }
                 }
             }
             session.saveOrUpdate(ticket);
 
         }
-        System.out.println(counter);
     }
 
     private TicketOrder generateTicketOrders(int index, ETicketOrder verkoopWijze) {
