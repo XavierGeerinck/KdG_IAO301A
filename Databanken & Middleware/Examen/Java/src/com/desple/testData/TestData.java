@@ -249,13 +249,14 @@ public class TestData {
             cal.setTime(dag.getDatum());
             long barcode = cal.getTimeInMillis() + i;
             ticket.setBarcode(barcode + "" );
-            if(i == 0){
+            int index = i %ticketTypes.size();
+            if(index == 0){
                 ticket.setTicketType(ticketTypes.get(2));
-            }else if (i == 1){
+            }else if (index == 1){
                 ticket.setTicketType(ticketTypes.get(1));
-            }else if ((i == 2) || (i == 3 ) || ( i == 4) || ( i == 5)){
+            }else if ((index == 2) || (index == 3 ) || ( index == 4) || ( index == 5)){
                 ticket.setTicketType(ticketTypes.get(0));
-            }else if ((i == 6) || (i == 7) || ( i == 8) || ( i == 9)){
+            }else if ((index == 6) || (index == 7) || ( index == 8) || ( index == 9)){
                 if(ticketTypes.size() >= 4) {
                     ticket.setTicketType(ticketTypes.get(3));
                 }else{
@@ -276,7 +277,7 @@ public class TestData {
             cal.setTime(date);
             cal.set(Calendar.HOUR_OF_DAY, 11);
             if(cal.get(Calendar.YEAR)== 2014){
-                for(int index = 0; index < 5; index++){
+                for(int j = 0; j < 5; j++){
                     for(Zone zone: zones){
                         Tracking trackingIn = new Tracking();
                         trackingIn.setInOut(0);

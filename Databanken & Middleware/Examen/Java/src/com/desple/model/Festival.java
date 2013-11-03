@@ -25,10 +25,10 @@ public class Festival {
     @Column(name="eind_date")
     private Date eindDate;
 
-    @OneToMany(mappedBy = "festival", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "festival")
     private Set<Zone> zones = new HashSet<Zone>();
 
-    @OneToMany(mappedBy = "festival", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "festival")
     private Set<FestivalDag> festivalDagen = new HashSet<FestivalDag>();
 
     public Festival() {
