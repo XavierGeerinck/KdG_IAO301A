@@ -89,7 +89,7 @@ Bio
       <x>666</x>
       <y>333</y>
       <w>126</w>
-      <h>144</h>
+      <h>153</h>
     </coordinates>
     <panel_attributes>Optreden
 --
@@ -100,7 +100,8 @@ soundcheck
 &lt;&lt;fk&gt;&gt; festDagId
 &lt;&lt;fk&gt;&gt; playlistId
 &lt;&lt;fk&gt;&gt; zoneId
-&lt;&lt;fk&gt;&gt; apperatuurId</panel_attributes>
+&lt;&lt;fk&gt;&gt; apperatuurId
+&lt;&lt;fk&gt;&gt; artiestId</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -122,16 +123,16 @@ Datum
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>657</x>
-      <y>450</y>
+      <y>459</y>
       <w>96</w>
-      <h>107</h>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=0..1
  
   Heeft &gt;</panel_attributes>
-    <additional_attributes>54;27;54;90</additional_attributes>
+    <additional_attributes>54;27;54;81</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -153,8 +154,8 @@ m2=0..n
     <coordinates>
       <x>657</x>
       <y>72</y>
-      <w>90</w>
-      <h>117</h>
+      <w>94</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
@@ -168,8 +169,8 @@ m2=1
     <coordinates>
       <x>189</x>
       <y>0</y>
-      <w>171</w>
-      <h>81</h>
+      <w>179</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
@@ -195,8 +196,8 @@ Behoort &gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>864</x>
-      <y>549</y>
+      <x>945</x>
+      <y>540</y>
       <w>90</w>
       <h>81</h>
     </coordinates>
@@ -213,14 +214,14 @@ eindDatum</panel_attributes>
     <coordinates>
       <x>729</x>
       <y>522</y>
-      <w>152</w>
+      <w>233</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 Heeft &gt;</panel_attributes>
-    <additional_attributes>135;45;27;45</additional_attributes>
+    <additional_attributes>216;45;27;45</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -235,22 +236,6 @@ m1=1
 m2=0..n
 Behoort tot &gt;</panel_attributes>
     <additional_attributes>63;27;63;117</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>603</x>
-      <y>990</y>
-      <w>90</w>
-      <h>117</h>
-    </coordinates>
-    <panel_attributes>Bezoeker
---
-&lt;&lt;pk&gt;&gt; id
-trackingNmr
-Naam
-Adres</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -376,8 +361,8 @@ ZoneType
     <coordinates>
       <x>819</x>
       <y>1071</y>
-      <w>90</w>
-      <h>198</h>
+      <w>94</w>
+      <h>206</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
@@ -391,14 +376,14 @@ m2=1
     <coordinates>
       <x>891</x>
       <y>594</y>
-      <w>191</w>
+      <w>200</w>
       <h>728</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1..n
 &lt; Heeft</panel_attributes>
-    <additional_attributes>27;36;27;45;153;45;162;711;27;711</additional_attributes>
+    <additional_attributes>117;27;117;45;162;45;162;711;27;711</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -465,15 +450,15 @@ Heeft</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>891</x>
-      <y>765</y>
-      <w>156</w>
-      <h>522</h>
+      <y>1017</y>
+      <w>112</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=-
-m1=1..n
-m2=1
-Geeft toegang &gt;</panel_attributes>
-    <additional_attributes>27;504;90;504;90;27</additional_attributes>
+m1=1
+m2=1..n
+&gt;</panel_attributes>
+    <additional_attributes>27;252;90;252;90;27</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -495,8 +480,8 @@ Geeft toegang &gt;</panel_attributes>
     <coordinates>
       <x>414</x>
       <y>18</y>
-      <w>234</w>
-      <h>81</h>
+      <w>242</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
@@ -604,24 +589,79 @@ m2=1..n
     <panel_attributes>Tracking
 --
 &lt;&lt;pk&gt;&gt; id
-timestamp
-in/Out
-&lt;&lt;fk&gt;&gt; bezoekerId</panel_attributes>
+trackingNummer
+timestampIn 
+timestampOut</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>666</x>
-      <y>990</y>
-      <w>153</w>
-      <h>81</h>
+      <x>117</x>
+      <y>72</y>
+      <w>566</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+treed op&gt;</panel_attributes>
+    <additional_attributes>54;27;54;261;549;261</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>927</x>
+      <y>594</y>
+      <w>100</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+steld op&gt;</panel_attributes>
+    <additional_attributes>54;117;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>945</x>
+      <y>945</y>
+      <w>90</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>TicketTypeZone
+--
+&lt;&lt;pk&gt;&gt;ticketTypeId&lt;&lt;fk&gt;&gt;
+&lt;&lt;pk&gt;&gt;zoneTypeId&lt;&lt;fk&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>954</x>
+      <y>765</y>
+      <w>58</w>
+      <h>197</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+&gt;</panel_attributes>
+    <additional_attributes>36;180;36;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>693</x>
+      <y>1170</y>
+      <w>170</w>
+      <h>143</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1..n
- 
- Heeft &gt;</panel_attributes>
-    <additional_attributes>27;45;144;45</additional_attributes>
+is gelinked met&gt;</panel_attributes>
+    <additional_attributes>135;126;72;126;72;45;153;45;153;90</additional_attributes>
   </element>
 </diagram>
