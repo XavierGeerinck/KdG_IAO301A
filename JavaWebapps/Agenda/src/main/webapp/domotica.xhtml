@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Overzicht Huis</title>
+    </h:head>
+    <h:body> 
+        <p:panel header="Meetwaarden" footer="KdG Domotica Inc." style="width:90%;margin:auto">
+            <p:panelGrid columns="3"  style="width:100%;">
+                <p:barChart id="living" value="#{domoticaBean.getCategoryModel('living')}" legendPosition="ne"
+                            title="living" min="0" max="100"/>
+
+                <p:barChart id="keuken" value="#{domoticaBean.getCategoryModel('keuken')}" legendPosition="ne"
+                            title="keuken" min="0" max="100"/>
+
+                <p:barChart id="badkamer" value="#{domoticaBean.getCategoryModel('badkamer')}" legendPosition="ne"
+                            title="badkamer" min="0" max="100"/>
+
+                <p:barChart id="slaapkamer1" value="#{domoticaBean.getCategoryModel('slaapkamer1')}" legendPosition="ne"
+                            title="slaapkamer1" min="0" max="100"/>
+
+                <p:barChart id="slaapkamer2" value="#{domoticaBean.getCategoryModel('slaapkamer2')}" legendPosition="ne"
+                            title="slaapkamer2" min="0" max="100"/>
+                
+                <p:barChart id="kelder" value="#{domoticaBean.getCategoryModel('kelder')}" legendPosition="ne"
+                            title="kelder" min="0" max="100"/>
+            </p:panelGrid>
+        </p:panel>
+
+    </h:body>
+</html>
+

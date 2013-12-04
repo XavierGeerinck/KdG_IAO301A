@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>#{msgs.loginWindowTitle}</title>
+        <script type="text/javascript">
+            function showStatus(data)
+            {
+                document.getElementById("status").innerHTML = data.status;
+            }
+        </script>
+    </h:head>
+
+    <h:body style="background: #fefeef">   
+        <h:form>
+            <h3>#{msgs.loginHeading}</h3>
+            <h:panelGrid columns="3">
+
+                #{msgs.namePrompt}
+                <h:inputText value="#{user.name}" id="name" validator="#{user.validateName}">
+                    <f:ajax onevent="showStatus" event="keyup" render="echo" listener="#{user.processAjaxBehavior}"/>
+                </h:inputText>
+                <h:message for="name" id="nameError" style="color: red" />
+
+                #{msgs.passwordPrompt}
+                <h:inputSecret value="#{user.password}" id="password" size="8">
+                    <f:ajax event="keyup" render="echopassword"/>    
+                </h:inputSecret>
+
+                <h:commandButton value="#{msgs.loginButtonText}" action="welcome"/>            
+            </h:panelGrid>
+
+            <p><h:outputText id="echo" value="User name : #{user.name}"/></p>
+            <p><h:outputText id="echopassword" value="Password : #{user.password}"/></p>
+            <p id="status"></p>
+        </h:form>
+    </h:body>
+</html>

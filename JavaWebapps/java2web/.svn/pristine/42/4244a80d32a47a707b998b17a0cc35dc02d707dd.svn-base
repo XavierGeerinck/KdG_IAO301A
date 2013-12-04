@@ -1,0 +1,12 @@
+windowTitle=Gebruik van JSF Componenten in een tabel
+
+caption=Componentenvoorbeeld
+numberHeader=Getal
+textfieldHeader=Tekstveld
+buttonHeader=Knoppen
+checkboxHeader=Checkboxen
+linkHeader=Links
+menuHeader=Menu
+graphicHeader=Afbeeldingen
+radioHeader=Radio Buttons
+listboxHeader=Lijsten

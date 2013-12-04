@@ -1,0 +1,63 @@
+package be.kdg.cookies.view;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/Catalogus")
+public class CatalogusServlet extends HttpServlet
+{
+    @Override
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException
+    {
+
+        String klantnr = request.getParameter("klantnr");
+        if (klantnr != null)
+        {
+            Cookie cookie = new Cookie("klantnr", klantnr);
+            response.addCookie(cookie);
+        }
+        else
+        {
+            klantnr = haalKlantNummer(request);
+        }
+
+        PrintWriter out = response.getWriter();
+        out.println("<html><head>");
+        out.println("<title>Catalogus</title></head>");
+        out.println("<body bgcolor='#99FFCC'>");
+        out.println("<h2>Maak je keuze klant nummer " + klantnr + "</h2>");
+
+        out.println("<form method=\"POST\" action=\"Mandje\">");
+        out.println("Je hebt de keuze uit de volgende films:<br><br>");
+        out.println("  <input type=\"radio\" name=\"film\" value=\"The Matrix\">The Matrix</input><br>");
+        out.println("  <input type=\"radio\" name=\"film\" value=\"Memento\">Memento</input><br>");
+        out.println("  <input type=\"radio\" name=\"film\" value=\"Daredevil\">Daredevil</input><br>");
+        out.println("  <input type=\"radio\" name=\"film\" value=\"Resident Evil\">Resident Evil</input><br><br>");
+        out.println("  <input type=\"submit\" name=\"submit\" value=\"Koop\">");
+        out.println("</form>");
+        out.println("</body><html>");
+    }
+
+    private String haalKlantNummer(HttpServletRequest request)
+    {
+        String klantnr = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null)
+        {
+            for (int i = 0; i < cookies.length; i++)
+            {
+                Cookie cookie = cookies[i];
+                String cookieName = cookie.getName();
+                if (cookieName.equals("klantnr"))
+                {
+                    klantnr = cookie.getValue();
+                }
+            }
+        }
+        return klantnr;
+    }
+}

@@ -1,0 +1,22 @@
+.orders {
+    border: none;
+    border-collapse: collapse;
+    font-family: monospace;    
+    margin: 0 auto;
+    width: 60%;
+}
+
+.ordersHeader {
+    text-align: center;    
+    color: white;
+    background: #4671D5;
+}
+.oddRow {
+    text-align: center;
+    background: #BF8F30;        
+}
+
+.evenRow {
+    text-align: center;
+    background: #FFD073;
+}

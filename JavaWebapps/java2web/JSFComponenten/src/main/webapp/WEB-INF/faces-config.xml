@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <resource-bundle>
+            <locale-config>
+                <default-locale>en_US</default-locale>
+                <supported-locale>nl</supported-locale>                
+            </locale-config>
+            <base-name>be.kdg.componentenvoorbeeld.i18n.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+
+    <managed-bean>
+        <managed-bean-name>tableData</managed-bean-name>
+        <managed-bean-class>be.kdg.componentenvoorbeeld.TableData</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <value>
+                <list-entries>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                    <value>5</value>
+                </list-entries>
+            </value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>

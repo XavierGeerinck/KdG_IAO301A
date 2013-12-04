@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputScript library="scripts" name="script.js" />
+        <title>#{msgs.windowTitle}</title>
+    </h:head>
+    <h:body style="background: #eee">
+        <h:form>
+            <h:dataTable value="#{tableData.rows}" var="row" 
+                         captionStyle="font-size: 0.95em;" 
+                         styleClass="orders"
+                         headerClass="ordersHeader"
+                         rowClasses="oddRow,evenRow" >
+                
+                <f:facet name="caption">#{msgs.caption}</f:facet>
+
+                <h:column>
+                    <f:facet name="header">#{msgs.numberHeader}</f:facet>
+                    <h:outputText value="Rijnummer #{row.number}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.textfieldHeader}</f:facet>
+                    <h:inputText value="#{row.number}" size="3"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.buttonHeader}</f:facet>
+                    <h:commandButton value="#{row.number}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.checkboxHeader}</f:facet>
+                    <h:outputLabel for="switch">Toon/verberg</h:outputLabel>
+                    <h:selectBooleanCheckbox id="switch" value="#{row.visible}" onclick="submit()" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.linkHeader}</f:facet>
+                    <h:outputLink value="http://www.google.com" rendered="#{row.visible}">
+                        <h:outputText value="www.#{row.number}.com" />
+                    </h:outputLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.graphicHeader}</f:facet>
+                    <h:graphicImage library="images" name="dice#{row.number}.gif"
+                                    style="border: 0px" 
+                                    rendered="#{row.visible}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.menuHeader}</f:facet>
+                    <h:selectOneMenu rendered="#{row.visible}">
+                        <f:selectItem itemLabel="#{row.number}" itemValue="#{row.number}" 
+                                      rendered="#{row.visible}"/>
+                    </h:selectOneMenu>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.radioHeader}</f:facet>
+                    <h:selectOneRadio layout="lineDirection" value="nextMonth" rendered="#{row.visible}">
+                        <f:selectItem itemValue="yes" itemLabel="yes"/>
+                        <f:selectItem itemValue="no" itemLabel="no"/>
+                    </h:selectOneRadio>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.listboxHeader}</f:facet>
+                    <h:selectOneListbox size="4" rendered="#{row.visible}">
+                        <f:selectItem itemValue="yes" itemLabel="yes"/>
+                        <f:selectItem itemValue="maybe" itemLabel="maybe"/>
+                        <f:selectItem itemValue="no" itemLabel="no"/>
+                        <f:selectItem itemValue="ok" itemLabel="ok"/>
+                    </h:selectOneListbox>
+                </h:column>                
+                <h:column>
+                    <h:commandLink value="Delete" 
+                                   action="#{tableData.deleteRow(row)}"
+                                   rendered="#{row.visible}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>

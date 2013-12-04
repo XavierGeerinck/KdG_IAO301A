@@ -1,0 +1,23 @@
+/* 
+    Document   : main
+    Created on : Oct 18, 2013, 2:43:34 PM
+    Author     : Thierry
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+h1{
+    background-color: aqua;
+}
+
+#firstColor {
+   background-color: aqua;
+}
+
+#secondColor {
+    background-color: red;
+}

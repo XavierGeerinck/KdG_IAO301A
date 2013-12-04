@@ -1,0 +1,46 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. NIEUW-PRODUCT.
+       AUTHOR. XAVIER.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT OPTIONAL Bewegingen
+                  ASSIGN TO "BESTANDEN/BEWEGINGEN.DAT".
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD Bewegingen.
+       01  BEWEGING.
+           02 PRODNR     PIC X(6).
+           02 CHANGE     PIC S9(5).
+
+       PROCEDURE DIVISION.
+
+       MAIN.
+           PERFORM INITIALISEER
+           PERFORM INVOER-BEWEGING
+           PERFORM VOEG-BEWEGING-TOE
+           PERFORM SLUIT-BEWEGINGEN
+           STOP RUN.
+
+       INITIALISEER.
+           MOVE ZEROS TO BEWEGING
+           OPEN EXTEND Bewegingen.
+
+       INVOER-BEWEGING.
+           DISPLAY "GEEF HET PRODUCTNUMMER:"
+           ACCEPT PRODNR.
+           DISPLAY "GEEF DE VERANDERING (VOOR VERKOOP ENTER SYMBOOL):"
+           ACCEPT CHANGE.
+
+       VOEG-BEWEGING-TOE.
+           WRITE BEWEGING
+           END-WRITE.
+
+       SLUIT-BEWEGINGEN.
+           CLOSE Bewegingen.
+
+       FOUT.
+           DISPLAY "ER IS EEN FOUT OPGETREDEN"
+           STOP RUN.

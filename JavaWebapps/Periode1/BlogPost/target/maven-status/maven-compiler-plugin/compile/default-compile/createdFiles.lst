@@ -1,0 +1,10 @@
+com\mycompany\blogpost\models\Blog.class
+com\mycompany\blogpost\listeners\MyContextListener.class
+com\mycompany\blogpost\listeners\MyRequestListener.class
+com\mycompany\blogpost\Servlets\BlogListServlet.class
+com\mycompany\blogpost\models\User.class
+com\mycompany\blogpost\listeners\MySessionListener.class
+com\mycompany\blogpost\models\Post.class
+com\mycompany\blogpost\Servlets\LoginServlet.class
+com\mycompany\blogpost\Servlets\LogoffServlet.class
+com\mycompany\blogpost\Servlets\MyBlogServlet.class

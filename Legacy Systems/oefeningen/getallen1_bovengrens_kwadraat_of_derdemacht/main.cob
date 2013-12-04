@@ -1,0 +1,36 @@
+     IDENTIFICATION DIVISION.
+       PROGRAM-ID. MAIN.
+       AUTHOR. XAVIER_GEERINCK.
+      *ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  BOVENGRENS     PIC 99     VALUE 0.
+       01  COUNTER        PIC 99     VALUE 0.
+       01  COUNTERRESULT  PIC 9999   VALUE 0.
+       01  EXPONENTCHOICE PIC 9      VALUE 0.
+       PROCEDURE DIVISION.
+       MAINLINE.
+           DISPLAY "ENTER THE FIRST NUMBER (UNDER 100)".
+           ACCEPT BOVENGRENS
+
+           DISPLAY "ENTER THE CHOICE (0 = 2de macht, 1 = 3de macht)".
+           ACCEPT EXPONENTCHOICE
+
+           PERFORM UNTIL COUNTER = BOVENGRENS
+             IF EXPONENTCHOICE = 0
+                 PERFORM KWADRAAT
+             ELSE
+                 PERFORM DERDEMACHT
+             END-IF
+
+             ADD 1 TO COUNTER
+             DISPLAY "Number: " COUNTERRESULT
+           END-PERFORM
+           STOP RUN.
+           
+       KWADRAAT.
+           COMPUTE COUNTERRESULT = COUNTER ** 2.
+
+       DERDEMACHT.
+           COMPUTE COUNTERRESULT = COUNTER ** 3.
+           

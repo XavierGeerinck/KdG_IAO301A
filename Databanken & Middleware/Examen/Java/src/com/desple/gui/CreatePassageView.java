@@ -10,13 +10,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Xavier
- * Date: 26/10/13
- * Time: 19:05
- * To change this template use File | Settings | File Templates.
- */
 public class CreatePassageView extends JFrame {
     private JButton btnIn;
     private JButton btnOut;

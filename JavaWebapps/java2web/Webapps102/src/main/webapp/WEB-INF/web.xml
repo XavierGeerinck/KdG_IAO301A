@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <filter>
+        <filter-name>LoggingFilter</filter-name>
+        <filter-class>be.kdg.webapps102.filters.LoggingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoggingFilter</filter-name>
+        <servlet-name>TeLoggenServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoggingFilter</filter-name>
+        <url-pattern>/index.html</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>be.kdg.webapps102.events.ServletContextMonitor</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>ServletContextDemo</servlet-name>
+        <servlet-class>be.kdg.webapps102.servlets.ServletContextDemo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DispatcherDemo</servlet-name>
+        <servlet-class>be.kdg.webapps102.servlets.DispatcherDemo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>be.kdg.webapps102.servlets.DispatcherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectDemo</servlet-name>
+        <servlet-class>be.kdg.webapps102.servlets.RedirectDemo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToonProductenServlet</servlet-name>
+        <servlet-class>be.kdg.webapps102.mvc.view.ToonProductenServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoegToeServlet</servlet-name>
+        <servlet-class>be.kdg.webapps102.mvc.controller.VoegToeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeLoggenServlet</servlet-name>
+        <servlet-class>be.kdg.webapps102.filters.TeLoggenServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletContextDemo</servlet-name>
+        <url-pattern>/ServletContextDemo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DispatcherDemo</servlet-name>
+        <url-pattern>/DispatcherDemo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/DispatcherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectDemo</servlet-name>
+        <url-pattern>/RedirectDemo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToonProductenServlet</servlet-name>
+        <url-pattern>/servlets/ToonProductenServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoegToeServlet</servlet-name>
+        <url-pattern>/servlets/VoegToeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeLoggenServlet</servlet-name>
+        <url-pattern>/TeLoggenServlet</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

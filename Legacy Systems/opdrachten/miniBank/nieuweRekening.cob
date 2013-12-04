@@ -1,0 +1,113 @@
+      **********************************************************
+      * NIEUWE REKENING
+      *
+      * AUTHOR: KRIS DEMUYNCK
+      * DATE: NOVEMBER 2008
+      * KAREL DE GROTE-HOGESCHOOL
+      *
+      * DIT PROGRAMMA LAAT TOE OM EEN NIEUWE REKENING TE OPENEN.
+      *
+      **********************************************************
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. NIEUWE-REKENING.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT OPTIONAL REKENINGEN ASSIGN TO "BESTANDEN/REKENINGEN"
+                  ACCESS MODE IS RANDOM
+                  ORGANIZATION IS INDEXED
+                  RECORD KEY IS REKNR.
+           SELECT KLANTEN ASSIGN TO "BESTANDEN/KLANTEN"
+                  ACCESS MODE IS RANDOM
+                  ORGANIZATION IS INDEXED
+                  RECORD KEY IS NR.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD  REKENINGEN BLOCK CONTAINS 10 RECORDS.
+       01  REK.
+           02 REKNR PIC 9(12).
+           02 KLANTNR PIC 9(7).
+           02 SALDO PIC 9(7)V99.
+           02 GEWIJZIGD PIC 9(8).
+           02 RENTE PIC 9(7)V99.
+       FD KLANTEN BLOCK CONTAINS 10 RECORDS.
+       01  KLANT.
+           02 NR       PIC 9(7).
+           02 FILLER   PIC X(91).
+
+       WORKING-STORAGE SECTION.
+       01  I-REKNR.
+           02 NUMMER PIC 9(10).
+           02 CHECKSUM PIC 99.
+       77  I-KLANTNR PIC 9(7).
+       77  FOUT PIC X.
+           88 GEENFOUT VALUE 0.
+           88 KLANT-NIET-GEVONDEN VALUE 1.
+           88 REK-GEVONDEN VALUE 2.
+           88 CHECKSUMVERKEERD VALUE 3.
+       77  QUOTIENT PIC 9(10).
+       77  REST PIC 99.
+
+       PROCEDURE DIVISION.
+
+       MAIN.
+           PERFORM INITIALISEER
+           PERFORM INVOER-REKENING
+           PERFORM CONTROLE-INVOER
+           PERFORM VOEG-REKENING-TOE
+           PERFORM SLUIT-BESTANDEN
+           STOP RUN.
+
+       INITIALISEER.
+           SET GEENFOUT TO TRUE
+           OPEN INPUT KLANTEN
+           OPEN I-O REKENINGEN.
+
+       INVOER-REKENING.
+           DISPLAY "GEEF HET KLANTNUMMER:"
+           ACCEPT I-KLANTNR
+           DISPLAY "GEEF HET NIEUWE REKENINGNUMMER:"
+           ACCEPT I-REKNR.
+
+       CONTROLE-INVOER.
+           MOVE I-KLANTNR TO NR
+           READ KLANTEN INVALID KEY SET KLANT-NIET-GEVONDEN TO TRUE
+           END-READ
+           IF KLANT-NIET-GEVONDEN
+               DISPLAY "KLANT NUMMER WERD NIET GEVONDEN."
+               DISPLAY "GELIEVE DE KLANT EERST TE REGISTREREN."
+           END-IF
+           MOVE I-REKNR TO REKNR
+           READ REKENINGEN INVALID KEY PERFORM NIKS
+                           NOT INVALID KEY SET REK-GEVONDEN TO TRUE
+           END-READ
+           IF REK-GEVONDEN
+               DISPLAY "REKENINGNUMMER BESTAAT AL."
+           END-IF
+           DIVIDE NUMMER BY 97 GIVING QUOTIENT REMAINDER REST
+           IF NOT REST = CHECKSUM
+               SET CHECKSUMVERKEERD TO TRUE
+			   DISPLAY REST
+               DISPLAY "REKENING NUMMER KLOPT NIET."
+           END-IF
+           IF NOT GEENFOUT
+               PERFORM SLUIT-BESTANDEN
+               STOP RUN
+           END-IF.
+
+       NIKS.
+           EXIT.
+
+       VOEG-REKENING-TOE.
+           MOVE I-KLANTNR TO KLANTNR
+           MOVE I-REKNR TO REKNR
+           MOVE ZERO TO SALDO RENTE
+           ACCEPT GEWIJZIGD FROM DATE
+           ADD 20000000 TO GEWIJZIGD
+           WRITE REK.
+
+       SLUIT-BESTANDEN.
+           CLOSE REKENINGEN KLANTEN.
+

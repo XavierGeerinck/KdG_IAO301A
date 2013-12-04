@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Login Bean Validation</title>        
+        <h:outputStylesheet library="css" name="error.css" />
+        <h:outputStylesheet library="css" name="main.css" />
+    </h:head>
+    <h:body>
+        <p:panel header="#{msgs.loginTitle}" styleClass="loginpanel">
+            <h:form id="loginForm">
+                <h:panelGrid columns="3">    
+                    <!-- vraag email -->
+                    #{msgs.loginUsername}
+                    <h:inputText id="username" value="#{loginBean.email}" size="30" />
+                    <h:message for="username" styleClass="error" />
+
+                    <!-- vraag password -->
+                    #{msgs.loginPassword}
+                    <h:inputSecret id="password" value="#{loginBean.password}" size="30" />
+                    <h:message for="password" styleClass="error" />                    
+
+                    <!-- verzendknop -->
+                    <h:commandButton type="submit" 
+                                     value="#{msgs.loginButton}" 
+                                     action="#{loginBean.verifyUser}"/>
+                </h:panelGrid>
+                <h:messages for="loginForm" styleClass="error"/>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

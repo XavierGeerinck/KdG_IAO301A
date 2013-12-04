@@ -1,0 +1,17 @@
+	   IDENTIFICATION DIVISION.
+       PROGRAM-ID. MAIN.
+       AUTHOR. XAVIER_GEERINCK.
+      *ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  INPUT-AREA.
+           05  COUNTER       PIC 99     VALUE 0.
+       PROCEDURE DIVISION.
+       MAINLINE.
+           PERFORM B-100-PROCESS
+              UNTIL COUNTER = 10.
+           STOP RUN.
+       B-100-PROCESS.
+           ADD 1 TO COUNTER
+               GIVING COUNTER.
+           DISPLAY "Number: " COUNTER.

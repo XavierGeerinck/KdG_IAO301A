@@ -1,0 +1,10 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+
+windowTitle=Using Value Change Events
+pageTitle=Please fill in your address
+streetAddressPrompt=Address
+cityPrompt=City
+statePrompt=Province
+countryPrompt=Country
+submit=Submit address

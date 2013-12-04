@@ -1,0 +1,16 @@
+/* 
+    Document   : error
+    Created on : Nov 30, 2011, 2:49:39 PM
+    Author     : wouter
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.error{
+    color: red;
+}

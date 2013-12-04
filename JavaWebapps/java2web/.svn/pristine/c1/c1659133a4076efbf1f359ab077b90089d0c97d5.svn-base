@@ -1,0 +1,11 @@
+<html>
+  <head><title>JSP lesvoorbeelden</title></head>
+  <body>
+    Kies een van volgende jsp voorbeelden:
+    <ul>
+        <li><a href="voorbeeld1.jsp">Voorbeeld 1</a></li>
+        <li><a href="scriptlets.jsp">Scriptlets</a></li>
+        <li><a href="mvc.jsp">MVC</a></li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Guess Date Application</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h3>Ik heb een datum in mijn "hoofd" tussen 
+                <h:outputText value="#{dateBean.minDate}"/> en 
+                <h:outputText value="#{dateBean.maxDate}"/>.</h3>       
+            <h3>Kan jij raden welke ?</h3>
+            <h:form>                
+                <h:dataTable value="#{dateBean.dates}" var="date">
+                    <f:facet name="header">
+                        <h:outputText value="Lijstje van datums" />
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Datum" />
+                        </f:facet>
+                        <h:outputText value="#{date}" />
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Kies" action="#{dateBean.guess}">
+                            <f:param name="date" value="#{date}" />
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>                
+                <h:panelGrid columns="2">
+                    <h:inputText id="datum" label="Datum"  value="#{dateBean.datum}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:validator validatorId="dateValidator" /> 
+                    </h:inputText><h:message for="datum" />
+                    <h:commandButton action="#{dateBean.guess}" value="Submit" />
+                </h:panelGrid>
+                <h:messages style="color:red" />
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
