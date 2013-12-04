@@ -78,7 +78,7 @@ public class Card {
         } else if(isAce() && currentValue > 10) {
             return 1;
         // Handle Jack, Queen, King
-        } else if(value >= 9 && value <= 11) {
+        } else if(value == 12 || value == 0 || value == 11) {
             return 10;
         // Handle normal cards
         } else {

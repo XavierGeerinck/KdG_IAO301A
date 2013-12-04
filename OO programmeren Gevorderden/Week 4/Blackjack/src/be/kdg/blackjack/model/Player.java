@@ -1,5 +1,7 @@
 package be.kdg.blackjack.model;
 
+import be.kdg.blackjack.enums.PlayerResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class Player {
     private final String name;
     private List<Card> cards;
     private int points;
+    private PlayerResult result;
 
     public Player(String name) {
         this.cards = new ArrayList<Card>();
@@ -19,9 +22,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public void askCard() {
     }
 
     public List<Card> getCards() {
@@ -35,5 +35,18 @@ public class Player {
 
     public int getTotalCardValue() {
         return points;
+    }
+
+    public PlayerResult getResult() {
+        return result;
+    }
+
+    public void setResult(PlayerResult result) {
+        this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
